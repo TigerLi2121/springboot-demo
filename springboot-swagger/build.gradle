@@ -10,3 +10,7 @@ dependencies {
             'io.swagger:swagger-models:1.5.21'
     )
 }
+
+jar {
+    archivesBaseName = 'swagger'
+}
