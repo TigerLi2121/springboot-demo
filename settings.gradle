@@ -2,4 +2,5 @@ rootProject.name = 'springboot-demo'
 include 'springboot-swagger'
 include 'springboot-jsp'
 include 'springboot-websocket'
+include 'springboot-api'
 
