@@ -1,7 +1,6 @@
 package com.mm.api.service;
 
 import com.mm.api.entity.User;
-import com.mm.api.enums.REnum;
 import com.mm.api.exception.ServiceException;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,9 @@ public class UserService {
     private final static ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>();
     private final Integer age = 18;
 
-    public void addUser(User user) throws Exception {
+    public void addUser(User user) {
         if (age > user.getAge()) {
-            throw new ServiceException(REnum.UNDER_EIGHTEEN);
+            throw new ServiceException("年龄不能低于18");
         }
         users.put(user.getId(), user);
     }

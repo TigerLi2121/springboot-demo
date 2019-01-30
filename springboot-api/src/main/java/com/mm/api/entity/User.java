@@ -1,6 +1,5 @@
 package com.mm.api.entity;
 
-import com.mm.api.enums.UserSexEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +30,13 @@ public class User implements Serializable {
 
     @ApiModelProperty(value = "用户性别", name = "userSex")
     private UserSexEnum userSex;
+
+    public enum UserSexEnum {
+        //男
+        MAN,
+        //女
+        WOMAN
+    }
 
     @ApiModelProperty(value = "用户年龄", name = "age")
     private Integer age;
