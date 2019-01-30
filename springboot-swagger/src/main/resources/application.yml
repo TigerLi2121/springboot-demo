@@ -1,0 +1,11 @@
+swagger:
+  enabled: true
+  docket:
+    user:
+      title: 用户接口
+      base-package: com.mm
+      base-path: /**
+    order:
+      title: 订单接口
+      base-package: com.mm
+      base-path: /**

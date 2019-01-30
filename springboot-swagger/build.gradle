@@ -1,0 +1,12 @@
+dependencies {
+    implementation ('com.spring4all:swagger-spring-boot-starter:1.8.0.RELEASE'){
+        exclude module: 'swagger-annotations'
+        exclude module: 'swagger-models'
+    }
+    implementation (
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.projectlombok:lombok',
+            'io.swagger:swagger-annotations:1.5.21',
+            'io.swagger:swagger-models:1.5.21'
+    )
+}
