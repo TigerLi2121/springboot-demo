@@ -1,14 +1,10 @@
 apply plugin: 'war'
 
 dependencies {
-    implementation ('org.springframework.boot:spring-boot-starter-web'){
-        exclude module: 'spring-boot-starter-tomcat'
-    }
     implementation (
             'javax.servlet:jstl',
             'org.projectlombok:lombok',
-    )
-    implementation (
+            'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-tomcat',
             'org.apache.tomcat.embed:tomcat-embed-jasper',
             'javax.servlet:javax.servlet-api'
