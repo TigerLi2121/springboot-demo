@@ -1,0 +1,7 @@
+dependencies {
+    implementation (
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.projectlombok:lombok',
+            'de.codecentric:spring-boot-admin-starter-client:2.1.3'
+    )
+}
