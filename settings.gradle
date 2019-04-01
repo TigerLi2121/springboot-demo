@@ -6,4 +6,5 @@ include 'springboot-api'
 include 'springboot-log4j2'
 include 'springboot-actuator'
 include 'springboot-admin'
+include 'springboot-rabbitmq'
 
