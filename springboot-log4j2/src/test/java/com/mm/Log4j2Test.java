@@ -13,7 +13,6 @@ public class Log4j2Test {
 
     @Test
     public void testLog(){
-        log.trace("I am trace log.");
         log.debug("I am debug log.");
         log.info("I am info log.");
         log.warn("I am warn log.");
