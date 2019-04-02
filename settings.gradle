@@ -8,4 +8,5 @@ include 'springboot-actuator'
 include 'springboot-admin'
 include 'springboot-rabbitmq'
 include 'springboot-utils'
+include 'springboot-redis'
 
