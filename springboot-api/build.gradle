@@ -3,6 +3,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-aop',
             'org.springframework.boot:spring-boot-starter-thymeleaf',
+            'org.springframework.boot:spring-boot-starter-test',
             'org.projectlombok:lombok',
             'io.springfox:springfox-swagger2:2.8.0',
             'io.springfox:springfox-swagger-ui:2.8.0'
