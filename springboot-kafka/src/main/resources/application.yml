@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  kafka:
+    bootstrap-servers: 192.168.29.128:9092  # 指定kafka 代理地址
+    producer:
+      retries: 0 # 消息发送最大尝试次数
+      batch-size: 16384 # 每次批量发送消息的数量
+      buffer-memory: 33554432 # 缓存大小
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  # 指定消息key的编解码方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer # 指定消息体的编解码方式
+    consumer:
+      group-id: my-consumer-group # 指定默认消费者group id
+      auto-offset-reset: latest # latest 表示消费最新消息,earliest 表示从头开始消费,none表示抛出异常,默认latest
+      enable-auto-commit: true # 定期地往zookeeper写入每个分区的offset
+      auto-commit-interval: 10000ms # 往zookeeper上写offset的频率
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer # 指定消息key的编解码方式
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer # 指定消息体的编解码方式
+
+kafka:
+  mytopic:
+    topic: mytopic
+
