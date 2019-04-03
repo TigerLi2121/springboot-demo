@@ -32,9 +32,9 @@ public class UserService {
 
     public void updateUser(Long id, User user) {
         User u = users.get(id)
-                .setPassWord(user.getPassWord())
+                .setPassword(user.getPassword())
                 .setNickName(user.getNickName())
-                .setUserSex(user.getUserSex())
+                .setGender(user.getGender())
                 .setAge(user.getAge())
                 .setGmtModified(new Date());
         users.put(id, u);

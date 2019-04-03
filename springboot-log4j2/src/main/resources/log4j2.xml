@@ -98,7 +98,7 @@
         </Root>
 
         <!--记录druid-sql的记录-->
-        <logger name="druid.sql.Statement" level="INFO" additivity="true">
+        <logger name="druid.sql.Statement" level="INFO" additivity="false">
             <appender-ref ref="druidSqlRollingFile"/>
         </logger>
 

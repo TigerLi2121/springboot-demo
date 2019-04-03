@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "用户controller", description = "用户信息操作", tags = {"用户信息操作接口"})
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired

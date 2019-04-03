@@ -1,7 +1,7 @@
 package com.mm;
 
 import com.mm.entity.User;
-import com.mm.mapper.UserMapper;
+import com.mm.mapper.UserMapper2;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,52 +12,52 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * xml
+ * 注解
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserMapperTest {
+public class UserMapper2Test {
     @Resource
-    private UserMapper userMapper;
+    private UserMapper2 userMapper2;
 
     @Test
     public void save() {
         User user = new User();
         user.setUsername("hehehe");
         user.setPassword("6666666");
-        user.setNickName("哈哈");
+        user.setNickName("呵呵呵呵");
         user.setGender(User.Gender.MALE);
         user.setGmtCreate(new Date());
         user.setGmtModified(new Date());
-        userMapper.insert(user);
+        userMapper2.insert(user);
     }
 
     @Test
     public void update() {
         User user = new User();
         user.setId(1L);
-        user.setUsername("haha");
-        user.setPassword("888888");
+        user.setUsername("hehe");
+        user.setPassword("666666");
         user.setNickName("呵呵");
-        user.setGender(User.Gender.FEMALE);
+        user.setGender(User.Gender.MALE);
         user.setGmtModified(new Date());
-        userMapper.update(user);
+        userMapper2.update(user);
     }
 
     @Test
     public void delete() {
-        userMapper.delete(2L);
+        userMapper2.delete(3L);
     }
 
     @Test
     public void get() {
-        User user = userMapper.get(2L);
+        User user = userMapper2.get(1L);
         System.out.println(user);
     }
 
     @Test
     public void getAll() {
-        List<User> users = userMapper.getAll();
+        List<User> users = userMapper2.getAll();
         System.out.println(users.toString());
     }
 }

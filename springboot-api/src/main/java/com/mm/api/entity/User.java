@@ -19,23 +19,23 @@ public class User implements Serializable {
     @ApiModelProperty(required = true, value = "用户ID", name = "id")
     private Long id;
 
-    @ApiModelProperty(value = "用户帐号", name = "userName")
-    private String userName;
+    @ApiModelProperty(value = "用户帐号", name = "username")
+    private String username;
 
-    @ApiModelProperty(value = "用户密码", name = "passWord")
-    private String passWord;
+    @ApiModelProperty(value = "用户密码", name = "password")
+    private String password;
 
     @ApiModelProperty(value = "用户昵称", name = "nickName")
     private String nickName;
 
-    @ApiModelProperty(value = "用户性别", name = "userSex")
-    private UserSexEnum userSex;
+    @ApiModelProperty(value = "用户性别", name = "gender")
+    private Gender gender;
 
-    public enum UserSexEnum {
+    public enum Gender {
         //男
-        MAN,
+        MALE,
         //女
-        WOMAN
+        FEMALE
     }
 
     @ApiModelProperty(value = "用户年龄", name = "age")
