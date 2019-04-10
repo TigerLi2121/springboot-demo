@@ -48,7 +48,7 @@ public class JwtFilter extends GenericFilterBean {
                 }
                 log.info("claims:{}", claims);
                 request.setAttribute("claims", claims);
-                request.setAttribute(Constant.CURRENT_USER, claims.get("userId"));
+                request.setAttribute(Constant.CURRENT_USER, claims.get("userId").asString());
             } catch (final Exception e) {
                 throw new MMException("登录失败", 886);
             }

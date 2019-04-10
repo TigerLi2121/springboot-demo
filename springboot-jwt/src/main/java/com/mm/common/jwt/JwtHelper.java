@@ -6,8 +6,6 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.auth0.jwt.interfaces.JWTVerifier;
 import com.mm.common.utils.SpringContextUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,9 +27,7 @@ public class JwtHelper {
      */
     public static Map<String, Claim> parseJWT(String jsonWebToken, String base64Security) {
         try {
-            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(base64Security)).build();
-            DecodedJWT jwt = verifier.verify(jsonWebToken);
-            return jwt.getClaims();
+            return JWT.require(Algorithm.HMAC256(base64Security)).build().verify(jsonWebToken).getClaims();
         } catch (JWTVerificationException exception) {
             log.error("parseJWT:", exception);
             return null;
@@ -72,7 +68,7 @@ public class JwtHelper {
                 userId.toString(),
                 jwtBean.getClientId(),
                 jwtBean.getName(),
-                (long)jwtBean.getExpiresSecond()*1000,
+                (long) jwtBean.getExpiresSecond() * 1000,
                 jwtBean.getBase64Secret());
     }
 }
