@@ -1,4 +1,4 @@
-package com.mm.api.advice;
+package com.mm.api.exception;
 
 import com.mm.api.common.R;
 import com.mm.api.exception.ServiceException;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
-public class ExceptionAdvice {
+public class MMExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public R handle(Exception e) {

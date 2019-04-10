@@ -1,0 +1,5 @@
+jwt:
+  clientId: 843a475d2dca43d087bc4d52b26314e2
+  base64Secret: cWlhbnFpYW5iaWFuY2hlbmc=
+  name: qqbc
+  expiresSecond: 172800

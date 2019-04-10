@@ -1,0 +1,8 @@
+dependencies {
+    implementation (
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.projectlombok:lombok', 
+            'com.auth0:java-jwt:3.8.0'
+    )
+}

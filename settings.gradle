@@ -11,4 +11,5 @@ include 'springboot-utils'
 include 'springboot-redis'
 include 'springboot-mybatis'
 include 'springboot-kafka'
+include 'springboot-jwt'
 
