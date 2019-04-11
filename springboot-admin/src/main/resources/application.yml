@@ -1,2 +1,10 @@
 server:
   port: 8088
+
+spring:
+  application:
+    name: springboot-admin
+  security:
+    user:
+      name: "admin"
+      password: "admin"

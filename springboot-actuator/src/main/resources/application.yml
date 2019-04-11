@@ -8,8 +8,10 @@ spring:
     admin:
       client:
         url: http://localhost:8088
+        username: "admin"
+        password: "admin"
         instance:
-          prefer-ip: true
+          service-base-url: http://localhost:8081
 info:
   name: actuator
 
