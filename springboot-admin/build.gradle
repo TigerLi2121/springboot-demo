@@ -2,6 +2,7 @@ dependencies {
     implementation (
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-security',
+            'org.springframework.boot:spring-boot-starter-mail',
             'de.codecentric:spring-boot-admin-starter-server:2.1.4'
     )
 }

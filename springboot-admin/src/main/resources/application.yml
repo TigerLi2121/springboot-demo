@@ -6,5 +6,16 @@ spring:
     name: springboot-admin
   security:
     user:
-      name: "admin"
-      password: "admin"
+      name: admin
+      password: admin
+# 邮件通知配置
+#  mail:
+#    host: smtp.mxhichina.com
+#    username: xxx@xxx.com
+#    password: xxx
+#  boot:
+#    admin:
+#      notify:
+#        mail:
+#          from: xxx@xxx.com   # 必填
+#          to: xxx@qq.com

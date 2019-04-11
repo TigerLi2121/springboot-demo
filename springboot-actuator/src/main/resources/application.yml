@@ -8,8 +8,8 @@ spring:
     admin:
       client:
         url: http://localhost:8088
-        username: "admin"
-        password: "admin"
+        username: admin
+        password: admin
         instance:
           service-base-url: http://localhost:8081
 info:
