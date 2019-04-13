@@ -1,3 +1,7 @@
+plugins {
+    id 'com.google.cloud.tools.jib' version '1.0.2'
+}
+
 dependencies {
     implementation ('org.springframework.boot:spring-boot-starter-web'){
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
@@ -9,4 +13,17 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-undertow',
             'de.codecentric:spring-boot-admin-starter-server:2.1.4'
     )
+}
+
+jib {
+    from {
+        image = 'openjdk:8-jre-alpine'
+    }
+    to {
+        image = 'registry.cn-hangzhou.aliyuncs.com/anita/springboot-admin:latest'
+        auth {
+            username = 'xxx@qq.com'
+            password = 'xxx'
+        }
+    }
 }
