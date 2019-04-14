@@ -3,11 +3,11 @@ plugins {
 }
 
 dependencies {
-    implementation ('org.springframework.boot:spring-boot-starter-web'){
+    implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
 
-    implementation (
+    implementation(
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-mail',
             'org.springframework.boot:spring-boot-starter-undertow',
