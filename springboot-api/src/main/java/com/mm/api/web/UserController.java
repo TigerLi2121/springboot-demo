@@ -1,4 +1,4 @@
-package com.mm.api.controller;
+package com.mm.api.web;
 
 import com.mm.api.common.R;
 import com.mm.api.entity.User;
