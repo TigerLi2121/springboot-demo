@@ -1,4 +1,4 @@
-package com.mm.controller;
+package com.mm.web;
 
 import com.mm.common.jwt.JwtHelper;
 import com.mm.common.utils.R;
