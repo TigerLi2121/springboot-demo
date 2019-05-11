@@ -1,9 +1,9 @@
 server:
-  port: 8081
+  port: 8889
 
 spring:
   application:
-    name: springboot-actuator
+    name: springboot-log4j2
   boot:
     admin:
       client:
@@ -11,7 +11,7 @@ spring:
         username: admin
         password: admin
         instance:
-          service-base-url: http://localhost:8081
+          service-base-url: http://localhost:8889
 info:
   name: ${spring.application.name}
 
@@ -23,6 +23,3 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-
-logging:
-  file: /log/actuator.log

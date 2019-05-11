@@ -5,7 +5,7 @@
 <!-- monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数。 -->
 <Configuration>
     <Properties>
-        <Property name="log.basedir">c:/logs/log4j2</Property>
+        <Property name="log.basedir">c:/logs/admin</Property>
         <Property name="log.layout">%d %-5p %t (%c:%L) - %m%n</Property>
     </Properties>
     <!--先定义所有的appender-->
