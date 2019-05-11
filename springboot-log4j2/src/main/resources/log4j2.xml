@@ -3,7 +3,8 @@
 <!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
 <!-- Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出。 -->
 <!-- monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数。 -->
-<Configuration status="WARN">
+<Configuration>
+
     <!--先定义所有的appender-->
     <Appenders>
         <!--这个输出控制台的配置-->
@@ -74,16 +75,6 @@
                 <TimeBasedTriggeringPolicy/>
             </Policies>
         </RollingFile>
-
-        <!--druid的日志记录追加器-->
-        <RollingFile name="druidSqlRollingFile" fileName="/logs/druid-sql.log"
-                     filePattern="logs/$${date:yyyy-MM}/api-%d{yyyy-MM-dd}-%i.log.gz">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %-5level %L %M - %msg%xEx%n"/>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="500 MB"/>
-                <TimeBasedTriggeringPolicy/>
-            </Policies>
-        </RollingFile>
     </Appenders>
 
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
@@ -97,13 +88,12 @@
             <appender-ref ref="RollingFileDebug"/>
         </Root>
 
-        <!--记录druid-sql的记录-->
-        <logger name="druid.sql.Statement" level="INFO" additivity="false">
-            <appender-ref ref="druidSqlRollingFile"/>
-        </logger>
-
         <logger name="com.mm" level="DEBUG" additivity="false">
             <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileWarn"/>
+            <appender-ref ref="RollingFileError"/>
+            <appender-ref ref="RollingFileDebug"/>
         </logger>
     </Loggers>
 </Configuration>
