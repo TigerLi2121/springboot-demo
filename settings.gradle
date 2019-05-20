@@ -13,4 +13,5 @@ include 'springboot-mybatis'
 include 'springboot-kafka'
 include 'springboot-jwt'
 include 'springboot-webflux'
+include 'springboot-mqtt'
 
