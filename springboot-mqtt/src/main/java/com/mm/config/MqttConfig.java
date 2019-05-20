@@ -16,7 +16,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
 /**
- * mq配置
+ * mqtt配置
  *
  * @author lwl
  * @date 2019/5/20
@@ -75,12 +75,9 @@ public class MqttConfig {
      */
     @Bean
     public MessageProducer inbound() {
-        // 可以同时消费（订阅）多个Topic
-        MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter(
-                        "mqttConsumer", mqttClientFactory(),
-                        "topic1");
-        adapter.setCompletionTimeout(5000);
+        // 同时消费（订阅）所有Topic
+        MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
+                "mqttConsumer", mqttClientFactory(), "+/#");
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);
         adapter.setOutputChannel(mqttInboundChannel());
@@ -103,7 +100,9 @@ public class MqttConfig {
     public MessageHandler handler() {
 
         return message -> {
-            log.info("topic:{}; payload:{}", message.getHeaders().get("mqtt_receivedTopic"), message.getPayload());
+            String topic = message.getHeaders().get("mqtt_receivedTopic", String.class);
+            String payload = String.valueOf(message.getPayload());
+            log.info("topic:{}; payload:{}", topic, payload);
         };
     }
 }

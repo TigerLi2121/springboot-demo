@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * mqtt
+ *
  * @author lwl
  * @date 2019/5/20
  */
