@@ -1,7 +1,7 @@
 package com.mm.common.jwt;
 
 import com.auth0.jwt.interfaces.Claim;
-import com.mm.common.exception.MMException;
+import com.mm.common.exception.ServiceException;
 import com.mm.common.utils.Constant;
 import com.mm.common.utils.SpringContextUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ public class JwtFilter extends GenericFilterBean {
         } else {
 
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                throw new MMException("登录失败", 886);
+                throw new ServiceException("登录失败", 886);
             }
             final String token = authHeader.substring(7);
 
@@ -44,13 +44,13 @@ public class JwtFilter extends GenericFilterBean {
                 JwtBean jwtBean = SpringContextUtils.getBean("jwtBean", JwtBean.class);
                 final Map<String, Claim> claims = JwtHelper.parseJWT(token, jwtBean.getBase64Secret());
                 if (claims == null) {
-                    throw new MMException("登录失败", 886);
+                    throw new ServiceException("登录失败", 886);
                 }
                 log.info("claims:{}", claims);
                 request.setAttribute("claims", claims);
                 request.setAttribute(Constant.CURRENT_USER, claims.get("userId").asString());
             } catch (final Exception e) {
-                throw new MMException("登录失败", 886);
+                throw new ServiceException("登录失败", 886);
             }
 
             chain.doFilter(req, res);

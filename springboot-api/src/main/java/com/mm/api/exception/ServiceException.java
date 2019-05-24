@@ -3,9 +3,9 @@ package com.mm.api.exception;
 import lombok.Getter;
 
 @Getter
-public class MMException extends RuntimeException {
+public class ServiceException extends RuntimeException {
     private String msg;
-    public MMException(String msg) {
+    public ServiceException(String msg) {
         this.msg = msg;
     }
 }

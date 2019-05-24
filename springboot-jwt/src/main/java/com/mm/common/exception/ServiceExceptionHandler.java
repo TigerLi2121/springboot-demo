@@ -1,20 +1,22 @@
-package com.mm.api.exception;
+package com.mm.common.exception;
 
-import com.mm.api.common.R;
-import com.mm.api.exception.ServiceException;
+import com.mm.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * 异常处理器
+ */
 @Slf4j
 @RestControllerAdvice
-public class MMExceptionHandler {
+public class ServiceExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public R handle(Exception e) {
         if (e instanceof ServiceException) {
-            ServiceException serviceException = (ServiceException) e;
-            return R.error(serviceException.getMsg());
+            ServiceException ServiceException = (ServiceException) e;
+            return R.error(ServiceException.getMsg());
         } else {
             log.error("【系统异常】:", e);
             return R.error("系统异常");
