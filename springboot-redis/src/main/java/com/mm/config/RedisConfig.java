@@ -45,6 +45,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     public LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("39.108.36.149");
         config.setPassword("qazwsxedcrfvtgbyhnujmik");
+        config.setDatabase(6);
         return new LettuceConnectionFactory(config);
     }
 
