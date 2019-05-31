@@ -42,15 +42,6 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public LettuceConnectionFactory redisConnectionFactory() {
-        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration("39.108.36.149");
-        config.setPassword("qazwsxedcrfvtgbyhnujmik");
-        config.setDatabase(6);
-        return new LettuceConnectionFactory(config);
-    }
-
-
-    @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate template = new StringRedisTemplate(factory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
