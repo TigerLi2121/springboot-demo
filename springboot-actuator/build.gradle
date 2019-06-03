@@ -7,6 +7,6 @@ dependencies {
     implementation(
             'org.springframework.boot:spring-boot-starter-undertow',
             'org.projectlombok:lombok',
-            'de.codecentric:spring-boot-admin-starter-client:2.1.4'
+            'de.codecentric:spring-boot-admin-starter-client:2.1.5'
     )
 }
