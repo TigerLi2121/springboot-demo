@@ -1,5 +1,7 @@
 package com.mm;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.entity.User;
 import com.mm.service.UserService;
 import org.junit.Test;
@@ -61,5 +63,12 @@ public class UserTest {
     public void getAll() {
         List<User> users = userService.list();
         users.forEach(System.out::println);
+    }
+
+    @Test
+    public void page(){
+        IPage<User> page = userService.page(new Page<>(1, 10));
+        System.out.println(page.getTotal());
+        page.getRecords().forEach(System.out::println);
     }
 }
