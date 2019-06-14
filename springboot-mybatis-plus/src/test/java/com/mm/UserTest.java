@@ -1,5 +1,6 @@
 package com.mm;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.entity.User;
@@ -46,6 +47,12 @@ public class UserTest {
         user.setGender(User.Gender.FEMALE);
         user.setGmtModified(new Date());
         userService.updateById(user);
+    }
+
+    @Test
+    public void update2() {
+        userService.update(User.builder().password("666").build(),
+                new UpdateWrapper<User>().eq("username", "hehehe"));
     }
 
     @Test
