@@ -15,4 +15,5 @@ include 'springboot-jwt'
 include 'springboot-webflux'
 include 'springboot-mqtt'
 include 'springboot-mybatis-plus'
+include 'springboot-mongodb'
 
