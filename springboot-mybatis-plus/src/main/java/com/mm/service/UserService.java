@@ -5,7 +5,7 @@ import com.mm.entity.User;
 
 /**
  * 用户
- * @author lwl
+ * @author shmily
  * @date 2019/6/3
  */
 public interface UserService extends IService<User> {

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * log4j2日志
- * @author lwl
+ * @author shmily
  * @date 2019/4/1
  */
 @SpringBootApplication

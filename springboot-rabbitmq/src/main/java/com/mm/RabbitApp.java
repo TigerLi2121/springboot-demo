@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * rabbit
  *
- * @author lwl
+ * @author shmily
  * @date 2019/4/1
  */
 @SpringBootApplication

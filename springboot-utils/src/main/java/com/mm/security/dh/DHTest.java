@@ -3,7 +3,7 @@ package com.mm.security.dh;
 import java.util.Base64;
 
 /**
- * @author: Shmily
+ * @author: shmily
  *
  * 配置JVM的系统变量：-Djdk.crypto.KeyAgreement.legacyKDF=true
  * @date: 2018/1/18 18:18

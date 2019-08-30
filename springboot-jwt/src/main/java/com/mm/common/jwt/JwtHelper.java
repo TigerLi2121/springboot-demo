@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * jwt信息
  *
- * @author lwl
+ * @author shmily
  * @date 2018/9/11
  */
 @Slf4j

@@ -18,7 +18,7 @@ import org.springframework.messaging.MessageHandler;
 /**
  * mqtt配置
  *
- * @author lwl
+ * @author shmily
  * @date 2019/5/20
  */
 @Slf4j
