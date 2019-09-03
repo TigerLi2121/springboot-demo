@@ -12,7 +12,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-mail',
             'org.springframework.boot:spring-boot-starter-undertow',
-            'de.codecentric:spring-boot-admin-starter-server:2.1.6'
+            "de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}"
     )
 }
 
