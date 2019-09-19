@@ -18,7 +18,7 @@ import org.springframework.messaging.MessageHandler;
 /**
  * mqtt配置
  *
- * @author lwl
+ * @author shmily
  * @date 2019/5/20
  */
 @Slf4j
@@ -41,7 +41,7 @@ public class MqttConfig {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[]{"tcp://192.168.131.129:1883"});
+        options.setServerURIs(new String[]{"tcp://192.168.168.150:1883"});
         factory.setConnectionOptions(options);
         return factory;
     }

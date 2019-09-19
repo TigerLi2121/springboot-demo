@@ -1,8 +1,6 @@
 spring:
   redis:
-    host: 39.108.36.149
-    password: qazwsxedcrfvtgbyhnujmik
-    database: 6
+    host: 192.168.168.150
     lettuce:
       pool:
         max-active: 20

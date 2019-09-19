@@ -27,7 +27,7 @@ public class Swagger2 {
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs")
                 .description("This is swagger2 demo")
-                .contact(new Contact("Shmily", "http://localhost:8080/swagger-ui.html", null))
+                .contact(new Contact("shmily", "http://localhost:8080/swagger-ui.html", null))
                 .version("1.0")
                 .build();
     }

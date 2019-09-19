@@ -3,7 +3,7 @@ package com.mm.security.ecdsa;
 import org.apache.commons.codec.binary.Hex;
 
 /**
- * @author: Shmily
+ * @author: shmily
  * @date: 2018/1/18 18:18
  **/
 public class ECDSATest {

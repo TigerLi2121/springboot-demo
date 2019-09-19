@@ -3,7 +3,7 @@ package com.mm.security.base64;
 import java.util.Base64;
 
 /**
- * @author: Shmily
+ * @author: shmily
  * @date: 2018/1/18 18:18
  **/
 public class Java8Base64 {

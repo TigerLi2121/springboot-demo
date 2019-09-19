@@ -1,7 +1,7 @@
 package com.mm.security.base64;
 
 /**
- * @author: Shmily
+ * @author: shmily
  * @date: 2018/1/18 18:18
  **/
 public class Base64Test {
