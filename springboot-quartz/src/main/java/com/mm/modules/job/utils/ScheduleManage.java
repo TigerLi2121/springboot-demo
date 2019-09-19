@@ -1,7 +1,7 @@
-package com.mm.modules.quartz.utils;
+package com.mm.modules.job.utils;
 
 import com.mm.common.exception.BadException;
-import com.mm.modules.quartz.entity.QuartzJob;
+import com.mm.modules.job.entity.ScheduleJob;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.quartz.impl.triggers.CronTriggerImpl;
@@ -20,27 +20,27 @@ import static org.quartz.TriggerBuilder.newTrigger;
  */
 @Slf4j
 @Component
-public class QuartzManage {
+public class ScheduleManage {
 
     private static final String JOB_NAME = "TASK_";
 
     @Resource(name = "scheduler")
     private Scheduler scheduler;
 
-    public void addJob(QuartzJob quartzJob) {
+    public void addJob(ScheduleJob scheduleJob) {
         try {
             // 构建job信息
             JobDetail jobDetail = JobBuilder.newJob(ExecutionJob.class).
-                    withIdentity(JOB_NAME + quartzJob.getId()).build();
+                    withIdentity(JOB_NAME + scheduleJob.getId()).build();
 
             //通过触发器名和cron 表达式创建 Trigger
             Trigger cronTrigger = newTrigger()
-                    .withIdentity(JOB_NAME + quartzJob.getId())
+                    .withIdentity(JOB_NAME + scheduleJob.getId())
                     .startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule(quartzJob.getCronExpression()))
+                    .withSchedule(CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression()))
                     .build();
 
-            cronTrigger.getJobDataMap().put(QuartzJob.JOB_KEY, quartzJob);
+            cronTrigger.getJobDataMap().put(ScheduleJob.JOB_KEY, scheduleJob);
 
             //重置启动时间
             ((CronTriggerImpl) cronTrigger).setStartTime(new Date());
@@ -49,8 +49,8 @@ public class QuartzManage {
             scheduler.scheduleJob(jobDetail, cronTrigger);
 
             // 暂停任务
-            if (quartzJob.getIsPause()) {
-                pauseJob(quartzJob.getId());
+            if (scheduleJob.getIsPause()) {
+                pauseJob(scheduleJob.getId());
             }
         } catch (Exception e) {
             log.error("创建定时任务失败", e);
@@ -61,28 +61,28 @@ public class QuartzManage {
     /**
      * 更新job cron表达式
      *
-     * @param quartzJob
+     * @param scheduleJob
      * @throws SchedulerException
      */
-    public void updateJobCron(QuartzJob quartzJob) {
+    public void updateJobCron(ScheduleJob scheduleJob) {
         try {
-            TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + quartzJob.getId());
+            TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + scheduleJob.getId());
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
             // 如果不存在则创建一个定时任务
             if (trigger == null) {
-                addJob(quartzJob);
+                addJob(scheduleJob);
                 trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
             }
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(quartzJob.getCronExpression());
+            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(scheduleJob.getCronExpression());
             trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
             //重置启动时间
             ((CronTriggerImpl) trigger).setStartTime(new Date());
-            trigger.getJobDataMap().put(QuartzJob.JOB_KEY, quartzJob);
+            trigger.getJobDataMap().put(ScheduleJob.JOB_KEY, scheduleJob);
 
             scheduler.rescheduleJob(triggerKey, trigger);
             // 暂停任务
-            if (quartzJob.getIsPause()) {
-                pauseJob(quartzJob.getId());
+            if (scheduleJob.getIsPause()) {
+                pauseJob(scheduleJob.getId());
             }
         } catch (Exception e) {
             log.error("更新定时任务失败", e);
@@ -111,17 +111,17 @@ public class QuartzManage {
     /**
      * 恢复一个job
      *
-     * @param quartzJob
+     * @param scheduleJob
      * @throws SchedulerException
      */
-    public void resumeJob(QuartzJob quartzJob) {
+    public void resumeJob(ScheduleJob scheduleJob) {
         try {
-            TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + quartzJob.getId());
+            TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + scheduleJob.getId());
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
             // 如果不存在则创建一个定时任务
             if (trigger == null)
-                addJob(quartzJob);
-            JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJob.getId());
+                addJob(scheduleJob);
+            JobKey jobKey = JobKey.jobKey(JOB_NAME + scheduleJob.getId());
             scheduler.resumeJob(jobKey);
         } catch (Exception e) {
             log.error("恢复定时任务失败", e);
@@ -132,19 +132,19 @@ public class QuartzManage {
     /**
      * 立即执行job
      *
-     * @param quartzJob
+     * @param scheduleJob
      * @throws SchedulerException
      */
-    public void runJobNow(QuartzJob quartzJob) {
+    public void runJobNow(ScheduleJob scheduleJob) {
         try {
-            TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + quartzJob.getId());
+            TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + scheduleJob.getId());
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
             // 如果不存在则创建一个定时任务
             if (trigger == null)
-                addJob(quartzJob);
+                addJob(scheduleJob);
             JobDataMap dataMap = new JobDataMap();
-            dataMap.put(QuartzJob.JOB_KEY, quartzJob);
-            JobKey jobKey = JobKey.jobKey(JOB_NAME + quartzJob.getId());
+            dataMap.put(ScheduleJob.JOB_KEY, scheduleJob);
+            JobKey jobKey = JobKey.jobKey(JOB_NAME + scheduleJob.getId());
             scheduler.triggerJob(jobKey, dataMap);
         } catch (Exception e) {
             log.error("定时任务执行失败", e);

@@ -1,4 +1,4 @@
-package com.mm.modules.quartz.config;
+package com.mm.modules.job.config;
 
 import org.quartz.Scheduler;
 import org.quartz.spi.TriggerFiredBundle;
@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
  * @date 2019-09-09
  */
 @Configuration
-public class QuartzConfig {
+public class ScheduleConfig {
 
     /**
      * 解决Job中注入Spring Bean为null的问题
      */
-    @Component("quartzJobFactory")
-    public class QuartzJobFactory extends AdaptableJobFactory {
+    @Component("scheduleJobFactory")
+    public class ScheduleJobFactory extends AdaptableJobFactory {
 
         @Autowired
         private AutowireCapableBeanFactory capableBeanFactory;
@@ -41,14 +41,14 @@ public class QuartzConfig {
     /**
      * 注入scheduler到spring
      *
-     * @param quartzJobFactory
+     * @param scheduleJobFactory
      * @return
      * @throws Exception
      */
     @Bean(name = "scheduler")
-    public Scheduler scheduler(QuartzJobFactory quartzJobFactory) throws Exception {
+    public Scheduler scheduler(ScheduleJobFactory scheduleJobFactory) throws Exception {
         SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
-        factoryBean.setJobFactory(quartzJobFactory);
+        factoryBean.setJobFactory(scheduleJobFactory);
         factoryBean.afterPropertiesSet();
         Scheduler scheduler = factoryBean.getScheduler();
         scheduler.start();

@@ -1,48 +1,51 @@
-package com.mm.modules.quartz.entity;
+package com.mm.modules.job.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 定时任务日志
+ * 定时任务
  *
  * @author shmily
  * @date 2019-09-09
  */
 @Data
-public class QuartzLog implements Serializable {
+@TableName("schedule_job")
+public class ScheduleJob implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    public static final String JOB_KEY = "JOB_KEY";
 
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 任务id
-     */
-    private Long jobId;
-
-    /**
-     * 任务名称
+     * 定时器名称
      */
     private String jobName;
 
     /**
      * cron表达式
      */
+    @NotBlank(message = "cron表达式不能为空")
     private String cronExpression;
 
     /**
      * 状态
      */
-    private Boolean isSuccess;
+    private Boolean isPause = false;
 
     /**
      * Bean名称
      */
+    @NotBlank(message = "bean名称不能为空")
     private String beanName;
 
     /**
@@ -56,17 +59,12 @@ public class QuartzLog implements Serializable {
     private String params;
 
     /**
-     * 异常详细
+     * 备注
      */
-    private String exceptionDetail;
+    private String remark;
 
     /**
-     * 耗时（毫秒）
-     */
-    private Long time;
-
-    /**
-     * 创建日期
+     * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;

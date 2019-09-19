@@ -1,11 +1,11 @@
-package com.mm.modules.quartz.api;
+package com.mm.modules.job.api;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.common.utils.R;
-import com.mm.modules.quartz.entity.QuartzJob;
-import com.mm.modules.quartz.service.QuartzJobService;
+import com.mm.modules.job.entity.ScheduleJob;
+import com.mm.modules.job.service.ScheduleJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronExpression;
@@ -20,10 +20,10 @@ import java.util.Date;
 @Slf4j
 @RestController
 @RequestMapping("/quartzJob")
-public class QuartzJobController {
+public class ScheduleJobController {
 
     @Autowired
-    private QuartzJobService quartzJobService;
+    private ScheduleJobService scheduleJobService;
 
     /**
      * 定时任务列表
@@ -31,8 +31,8 @@ public class QuartzJobController {
     @GetMapping("/list")
     public R list(Long page, Long limit, String beanName) {
         log.info("list page:{} limit:{} beanName:{}", page, limit, beanName);
-        IPage<QuartzJob> iPage = quartzJobService.page(new Page<>(page, limit),
-                new QueryWrapper<QuartzJob>().like(StringUtils.isNotBlank(beanName), "bean_name", beanName));
+        IPage<ScheduleJob> iPage = scheduleJobService.page(new Page<>(page, limit),
+                new QueryWrapper<ScheduleJob>().like(StringUtils.isNotBlank(beanName), "bean_name", beanName));
         return R.ok().put("list", iPage.getRecords()).put("total", iPage.getTotal());
     }
 
@@ -42,7 +42,7 @@ public class QuartzJobController {
     @GetMapping("/info/{jobId}")
     public R info(@PathVariable("jobId") Long jobId) {
         log.info("info jobId:{}", jobId);
-        QuartzJob job = quartzJobService.getById(jobId);
+        ScheduleJob job = scheduleJobService.getById(jobId);
         return R.ok().put("job", job);
     }
 
@@ -50,13 +50,13 @@ public class QuartzJobController {
      * 保存定时任务
      */
     @PostMapping("/save")
-    public R save(@RequestBody QuartzJob quartzJob) {
-        log.info("save quartzJob:{}", quartzJob);
-        if (!CronExpression.isValidExpression(quartzJob.getCronExpression())) {
+    public R save(@RequestBody ScheduleJob scheduleJob) {
+        log.info("save quartzJob:{}", scheduleJob);
+        if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
             return R.error("cron表达式格式错误");
         }
-        quartzJob.setCreateTime(new Date());
-        quartzJobService.saveJob(quartzJob);
+        scheduleJob.setCreateTime(new Date());
+        scheduleJobService.saveJob(scheduleJob);
         return R.ok();
     }
 
@@ -64,13 +64,13 @@ public class QuartzJobController {
      * 修改定时任务
      */
     @PostMapping("/update")
-    public R update(@RequestBody QuartzJob quartzJob) {
-        log.info("update quartzJob:{}", quartzJob);
-        if (!CronExpression.isValidExpression(quartzJob.getCronExpression())) {
+    public R update(@RequestBody ScheduleJob scheduleJob) {
+        log.info("update quartzJob:{}", scheduleJob);
+        if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
             return R.error("cron表达式格式错误");
         }
-        quartzJob.setCreateTime(new Date());
-        quartzJobService.update(quartzJob);
+        scheduleJob.setCreateTime(new Date());
+        scheduleJobService.update(scheduleJob);
         return R.ok();
     }
 
@@ -80,7 +80,7 @@ public class QuartzJobController {
     @PostMapping("/delete")
     public R delete(@RequestBody Long[] jobIds) {
         log.info("delete jobIds:{}", jobIds);
-        quartzJobService.deleteBatch(jobIds);
+        scheduleJobService.deleteBatch(jobIds);
         return R.ok();
     }
 
@@ -90,7 +90,7 @@ public class QuartzJobController {
     @PostMapping("/run")
     public R run(@RequestBody Long[] jobIds) {
         log.info("run jobIds:{}", jobIds);
-        quartzJobService.run(jobIds);
+        scheduleJobService.run(jobIds);
         return R.ok();
     }
 
@@ -100,7 +100,7 @@ public class QuartzJobController {
     @PostMapping("/pause")
     public R pause(@RequestBody Long[] jobIds) {
         log.info("pause jobIds:{}", jobIds);
-        quartzJobService.pause(jobIds);
+        scheduleJobService.pause(jobIds);
         return R.ok();
     }
 
@@ -110,7 +110,7 @@ public class QuartzJobController {
     @PostMapping("/resume")
     public R resume(@RequestBody Long[] jobIds) {
         log.info("resume jobIds:{}", jobIds);
-        quartzJobService.resume(jobIds);
+        scheduleJobService.resume(jobIds);
         return R.ok();
     }
 

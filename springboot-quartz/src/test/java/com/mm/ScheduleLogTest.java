@@ -14,7 +14,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class QuartzLogTest {
+public class ScheduleLogTest {
 
     @Autowired
     private WebApplicationContext context;

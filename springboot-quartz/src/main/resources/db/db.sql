@@ -1,6 +1,6 @@
 -- 定时任务
-DROP TABLE IF EXISTS `quartz_job`;
-CREATE TABLE `quartz_job` (
+DROP TABLE IF EXISTS `schedule_job`;
+CREATE TABLE `schedule_job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `job_name` varchar(255) DEFAULT NULL COMMENT '任务名称',
   `cron_expression` varchar(255) DEFAULT NULL COMMENT 'cron 表达式',
@@ -14,8 +14,8 @@ CREATE TABLE `quartz_job` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务';
 
 -- 定时任务日志
-DROP TABLE IF EXISTS `quartz_log`;
-CREATE TABLE `quartz_log` (
+DROP TABLE IF EXISTS `schedule_log`;
+CREATE TABLE `schedule_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `job_id` bigint(20) DEFAULT NULL COMMENT '任务ID',
   `job_name` varchar(255) DEFAULT NULL COMMENT '任务名称',

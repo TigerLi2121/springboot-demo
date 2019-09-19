@@ -1,7 +1,7 @@
 package com.mm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mm.modules.quartz.entity.QuartzJob;
+import com.mm.modules.job.entity.ScheduleJob;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class QuartzJobTest {
+public class ScheduleJobTest {
 
     @Autowired
     private WebApplicationContext context;
@@ -34,7 +34,7 @@ public class QuartzJobTest {
 
     @Test
     public void add() throws Exception {
-        QuartzJob job = new QuartzJob();
+        ScheduleJob job = new ScheduleJob();
         job.setJobName("有参定时任务");
         job.setBeanName("testTask");
         job.setMethodName("run1");
@@ -66,7 +66,7 @@ public class QuartzJobTest {
 
     @Test
     public void update() throws Exception {
-        QuartzJob job = new QuartzJob();
+        ScheduleJob job = new ScheduleJob();
         job.setId(1L);
         job.setCronExpression("0/30 * * * * ?");
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/quartzJob/update").contentType(MediaType.APPLICATION_JSON);

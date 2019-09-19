@@ -1,11 +1,11 @@
-package com.mm.modules.quartz.api;
+package com.mm.modules.job.api;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.common.utils.R;
-import com.mm.modules.quartz.entity.QuartzLog;
-import com.mm.modules.quartz.service.QuartzLogService;
+import com.mm.modules.job.entity.ScheduleLog;
+import com.mm.modules.job.service.ScheduleLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/quartzLog")
-public class QuartzLogController {
+public class ScheduleLogController {
 
     @Autowired
-    private QuartzLogService quartzLogService;
+    private ScheduleLogService scheduleLogService;
 
     /**
      * 定时任务日志列表
@@ -31,8 +31,8 @@ public class QuartzLogController {
     @GetMapping("/list")
     public R list(Long page, Long limit, String jobId) {
         log.info("list page:{} limit:{} jobId:{}", page, limit, jobId);
-        IPage<QuartzLog> iPage = quartzLogService.page(new Page<>(page, limit),
-                new QueryWrapper<QuartzLog>().like(StringUtils.isNotBlank(jobId), "job_id", jobId));
+        IPage<ScheduleLog> iPage = scheduleLogService.page(new Page<>(page, limit),
+                new QueryWrapper<ScheduleLog>().like(StringUtils.isNotBlank(jobId), "job_id", jobId));
         return R.ok().put("list", iPage.getRecords()).put("total", iPage.getTotal());
     }
 
@@ -41,7 +41,7 @@ public class QuartzLogController {
      */
     @GetMapping("/info/{logId}")
     public R info(@PathVariable("logId") Long logId) {
-        QuartzLog log = quartzLogService.getById(logId);
+        ScheduleLog log = scheduleLogService.getById(logId);
         return R.ok().put("log", log);
     }
 }

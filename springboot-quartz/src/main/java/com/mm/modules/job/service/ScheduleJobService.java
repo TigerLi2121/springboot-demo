@@ -1,22 +1,22 @@
-package com.mm.modules.quartz.service;
+package com.mm.modules.job.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.mm.modules.quartz.entity.QuartzJob;
+import com.mm.modules.job.entity.ScheduleJob;
 
 /**
  * 定时任务
  */
-public interface QuartzJobService extends IService<QuartzJob> {
+public interface ScheduleJobService extends IService<ScheduleJob> {
 
     /**
      * 保存定时任务
      */
-    void saveJob(QuartzJob quartzJob);
+    void saveJob(ScheduleJob scheduleJob);
 
     /**
      * 更新定时任务
      */
-    void update(QuartzJob quartzJob);
+    void update(ScheduleJob scheduleJob);
 
     /**
      * 批量删除定时任务

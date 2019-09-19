@@ -1,10 +1,10 @@
-package com.mm.modules.quartz.service.impl;
+package com.mm.modules.job.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mm.modules.quartz.dao.QuartzJobDao;
-import com.mm.modules.quartz.entity.QuartzJob;
-import com.mm.modules.quartz.service.QuartzJobService;
-import com.mm.modules.quartz.utils.QuartzManage;
+import com.mm.modules.job.dao.ScheduleJobDao;
+import com.mm.modules.job.entity.ScheduleJob;
+import com.mm.modules.job.service.ScheduleJobService;
+import com.mm.modules.job.utils.ScheduleManage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,33 +12,33 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 
-@Service("quartzJobService")
-public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobDao, QuartzJob> implements QuartzJobService {
+@Service("scheduleJobService")
+public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, ScheduleJob> implements ScheduleJobService {
 
 
     @Autowired
-    private QuartzManage quartzManage;
+    private ScheduleManage scheduleManage;
 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveJob(QuartzJob quartzJob) {
-        this.save(quartzJob);
-        quartzManage.addJob(quartzJob);
+    public void saveJob(ScheduleJob scheduleJob) {
+        this.save(scheduleJob);
+        scheduleManage.addJob(scheduleJob);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(QuartzJob quartzJob) {
-        this.updateById(quartzJob);
-        quartzManage.updateJobCron(quartzJob);
+    public void update(ScheduleJob scheduleJob) {
+        this.updateById(scheduleJob);
+        scheduleManage.updateJobCron(scheduleJob);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteBatch(Long[] jobIds) {
         for (Long jobId : jobIds) {
-            quartzManage.deleteJob(jobId);
+            scheduleManage.deleteJob(jobId);
         }
         //删除数据
         this.removeByIds(Arrays.asList(jobIds));
@@ -46,13 +46,13 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobDao, QuartzJob> i
 
     @Override
     public boolean updateBatch(Long[] jobIds, Boolean status) {
-        Collection<QuartzJob> jobs = this.listByIds(Arrays.asList(jobIds));
-        for (QuartzJob job : jobs) {
+        Collection<ScheduleJob> jobs = this.listByIds(Arrays.asList(jobIds));
+        for (ScheduleJob job : jobs) {
             if (status) {
-                quartzManage.resumeJob(job);
+                scheduleManage.resumeJob(job);
                 job.setIsPause(false);
             } else {
-                quartzManage.pauseJob(job.getId());
+                scheduleManage.pauseJob(job.getId());
                 job.setIsPause(true);
             }
         }
@@ -62,9 +62,9 @@ public class QuartzJobServiceImpl extends ServiceImpl<QuartzJobDao, QuartzJob> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void run(Long[] jobIds) {
-        Collection<QuartzJob> jobs = this.listByIds(Arrays.asList(jobIds));
-        for (QuartzJob job : jobs) {
-            quartzManage.runJobNow(job);
+        Collection<ScheduleJob> jobs = this.listByIds(Arrays.asList(jobIds));
+        for (ScheduleJob job : jobs) {
+            scheduleManage.runJobNow(job);
         }
     }
 

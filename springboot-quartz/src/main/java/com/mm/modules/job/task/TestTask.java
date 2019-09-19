@@ -1,4 +1,4 @@
-package com.mm.modules.quartz.task;
+package com.mm.modules.job.task;
 
 
 import lombok.extern.slf4j.Slf4j;

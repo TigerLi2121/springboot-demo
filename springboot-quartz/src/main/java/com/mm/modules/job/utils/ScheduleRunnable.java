@@ -1,4 +1,4 @@
-package com.mm.modules.quartz.utils;
+package com.mm.modules.job.utils;
 
 import com.mm.common.utils.SpringContextUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -13,13 +13,13 @@ import java.lang.reflect.Method;
  * @author
  */
 @Slf4j
-public class QuartzRunnable implements Runnable {
+public class ScheduleRunnable implements Runnable {
 
     private Object target;
     private Method method;
     private String params;
 
-    QuartzRunnable(String beanName, String methodName, String params)
+    ScheduleRunnable(String beanName, String methodName, String params)
             throws NoSuchMethodException, SecurityException {
         this.target = SpringContextUtils.getBean(beanName);
         this.params = params;
