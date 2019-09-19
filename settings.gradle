@@ -18,4 +18,5 @@ include 'springboot-mybatis-plus'
 include 'springboot-oauth2'
 include 'springboot-elasticsearch'
 include 'springboot-quartz'
+include 'springboot-shiro'
 
