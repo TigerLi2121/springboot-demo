@@ -1,14 +1,7 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.mm.common.utils;
 
-import org.apache.commons.lang.StringUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Mark sunlightcs@gmail.com
  */
+@Slf4j
 public class IPUtils {
-	private static Logger logger = LoggerFactory.getLogger(IPUtils.class);
 
 	/**
 	 * 获取IP地址

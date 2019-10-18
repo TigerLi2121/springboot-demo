@@ -8,8 +8,8 @@
 
 package com.mm.common.validator;
 
-import com.mm.common.exception.RRException;
-import org.apache.commons.lang.StringUtils;
+import com.mm.common.excption.RRException;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 数据校验

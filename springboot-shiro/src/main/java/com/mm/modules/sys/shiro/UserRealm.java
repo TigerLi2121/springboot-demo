@@ -3,6 +3,7 @@ package com.mm.modules.sys.shiro;
 import com.mm.common.utils.Constant;
 import com.mm.modules.sys.entity.SysMenuEntity;
 import com.mm.modules.sys.entity.SysUserEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
@@ -21,8 +22,8 @@ import java.util.*;
  * @author lwl
  * @date 2019/9/20
  */
+@Slf4j
 public class UserRealm extends AuthorizingRealm {
-
 
     /**
      * 授权(验证权限时调用)
@@ -67,7 +68,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-
+        log.info("doGetAuthenticationInfo username:{}", token.getUsername());
         //查询用户信息
         SysUserEntity user = new SysUserEntity();
         //账号不存在

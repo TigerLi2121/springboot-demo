@@ -1,15 +1,7 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.mm.common.validator;
 
 
-import com.mm.common.exception.RRException;
+import com.mm.common.excption.RRException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

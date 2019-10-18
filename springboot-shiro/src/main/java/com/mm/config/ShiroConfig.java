@@ -25,7 +25,7 @@ public class ShiroConfig {
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chain = new DefaultShiroFilterChainDefinition();
         chain.addPathDefinition("favicon.ico", "anon");
-        chain.addPathDefinition("/login", "anon");
+        chain.addPathDefinition("/sys/login", "anon");
         chain.addPathDefinition("/**", "user");
         return chain;
     }
