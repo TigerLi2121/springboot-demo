@@ -1,7 +1,7 @@
 package com.mm;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mm.modules.job.entity.ScheduleJob;
+import com.mm.modules.job.entity.ScheduleJobEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class ScheduleJobTest {
 
     @Test
     public void add() throws Exception {
-        ScheduleJob job = new ScheduleJob();
+        ScheduleJobEntity job = new ScheduleJobEntity();
         job.setJobName("有参定时任务");
         job.setBeanName("testTask");
         job.setMethodName("run1");
@@ -66,7 +66,7 @@ public class ScheduleJobTest {
 
     @Test
     public void update() throws Exception {
-        ScheduleJob job = new ScheduleJob();
+        ScheduleJobEntity job = new ScheduleJobEntity();
         job.setId(1L);
         job.setCronExpression("0/30 * * * * ?");
         MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/quartzJob/update").contentType(MediaType.APPLICATION_JSON);

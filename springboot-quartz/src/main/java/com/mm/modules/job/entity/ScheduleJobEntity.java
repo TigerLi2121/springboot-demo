@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Data
 @TableName("schedule_job")
-public class ScheduleJob implements Serializable {
+public class ScheduleJobEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final String JOB_KEY = "JOB_KEY";
@@ -38,7 +38,7 @@ public class ScheduleJob implements Serializable {
     private String cronExpression;
 
     /**
-     * 状态
+     * 状态：1暂停、0启用
      */
     private Boolean isPause = false;
 

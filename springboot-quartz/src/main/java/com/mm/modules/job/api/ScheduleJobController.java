@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.common.utils.R;
-import com.mm.modules.job.entity.ScheduleJob;
+import com.mm.modules.job.entity.ScheduleJobEntity;
 import com.mm.modules.job.service.ScheduleJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -31,8 +31,8 @@ public class ScheduleJobController {
     @GetMapping("/list")
     public R list(Long page, Long limit, String beanName) {
         log.info("list page:{} limit:{} beanName:{}", page, limit, beanName);
-        IPage<ScheduleJob> iPage = scheduleJobService.page(new Page<>(page, limit),
-                new QueryWrapper<ScheduleJob>().like(StringUtils.isNotBlank(beanName), "bean_name", beanName));
+        IPage<ScheduleJobEntity> iPage = scheduleJobService.page(new Page<>(page, limit),
+                new QueryWrapper<ScheduleJobEntity>().like(StringUtils.isNotBlank(beanName), "bean_name", beanName));
         return R.ok().put("list", iPage.getRecords()).put("total", iPage.getTotal());
     }
 
@@ -42,7 +42,7 @@ public class ScheduleJobController {
     @GetMapping("/info/{jobId}")
     public R info(@PathVariable("jobId") Long jobId) {
         log.info("info jobId:{}", jobId);
-        ScheduleJob job = scheduleJobService.getById(jobId);
+        ScheduleJobEntity job = scheduleJobService.getById(jobId);
         return R.ok().put("job", job);
     }
 
@@ -50,13 +50,13 @@ public class ScheduleJobController {
      * 保存定时任务
      */
     @PostMapping("/save")
-    public R save(@RequestBody ScheduleJob scheduleJob) {
-        log.info("save quartzJob:{}", scheduleJob);
-        if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
+    public R save(@RequestBody ScheduleJobEntity scheduleJobEntity) {
+        log.info("save quartzJob:{}", scheduleJobEntity);
+        if (!CronExpression.isValidExpression(scheduleJobEntity.getCronExpression())) {
             return R.error("cron表达式格式错误");
         }
-        scheduleJob.setCreateTime(new Date());
-        scheduleJobService.saveJob(scheduleJob);
+        scheduleJobEntity.setCreateTime(new Date());
+        scheduleJobService.saveJob(scheduleJobEntity);
         return R.ok();
     }
 
@@ -64,13 +64,13 @@ public class ScheduleJobController {
      * 修改定时任务
      */
     @PostMapping("/update")
-    public R update(@RequestBody ScheduleJob scheduleJob) {
-        log.info("update quartzJob:{}", scheduleJob);
-        if (!CronExpression.isValidExpression(scheduleJob.getCronExpression())) {
+    public R update(@RequestBody ScheduleJobEntity scheduleJobEntity) {
+        log.info("update quartzJob:{}", scheduleJobEntity);
+        if (!CronExpression.isValidExpression(scheduleJobEntity.getCronExpression())) {
             return R.error("cron表达式格式错误");
         }
-        scheduleJob.setCreateTime(new Date());
-        scheduleJobService.update(scheduleJob);
+        scheduleJobEntity.setCreateTime(new Date());
+        scheduleJobService.update(scheduleJobEntity);
         return R.ok();
     }
 

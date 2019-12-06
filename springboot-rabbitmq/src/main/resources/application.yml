@@ -1,5 +1,5 @@
 spring:
   rabbitmq:
-    host: 192.168.168.150
+    host: 39.108.36.149
     username: admin
     password: admin

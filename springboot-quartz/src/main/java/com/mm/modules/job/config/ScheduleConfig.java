@@ -1,14 +1,11 @@
 package com.mm.modules.job.config;
 
-import org.quartz.Scheduler;
-import org.quartz.spi.TriggerFiredBundle;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.quartz.AdaptableJobFactory;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * 定时任务配置
@@ -19,39 +16,44 @@ import org.springframework.stereotype.Component;
 @Configuration
 public class ScheduleConfig {
 
-    /**
-     * 解决Job中注入Spring Bean为null的问题
-     */
-    @Component("scheduleJobFactory")
-    public class ScheduleJobFactory extends AdaptableJobFactory {
+    @Bean
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) {
+        SchedulerFactoryBean factory = new SchedulerFactoryBean();
+        factory.setDataSource(dataSource);
 
-        @Autowired
-        private AutowireCapableBeanFactory capableBeanFactory;
+        //quartz参数
+        Properties prop = new Properties();
+        prop.put("org.quartz.scheduler.instanceName", "RenrenScheduler");
+        prop.put("org.quartz.scheduler.instanceId", "AUTO");
+        //线程池配置
+        prop.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
+        prop.put("org.quartz.threadPool.threadCount", "20");
+        prop.put("org.quartz.threadPool.threadPriority", "5");
+        //JobStore配置
+        prop.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
+        //集群配置
+        prop.put("org.quartz.jobStore.isClustered", "true");
+        prop.put("org.quartz.jobStore.clusterCheckinInterval", "15000");
+        prop.put("org.quartz.jobStore.maxMisfiresToHandleAtATime", "1");
 
-        @Override
-        protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
+        prop.put("org.quartz.jobStore.misfireThreshold", "12000");
+        prop.put("org.quartz.jobStore.tablePrefix", "QRTZ_");
+        prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");
 
-            //调用父类的方法
-            Object jobInstance = super.createJobInstance(bundle);
-            capableBeanFactory.autowireBean(jobInstance);
-            return jobInstance;
-        }
-    }
+        //PostgreSQL数据库，需要打开此注释
+        //prop.put("org.quartz.jobStore.driverDelegateClass", "org.quartz.impl.jdbcjobstore.PostgreSQLDelegate");
 
-    /**
-     * 注入scheduler到spring
-     *
-     * @param scheduleJobFactory
-     * @return
-     * @throws Exception
-     */
-    @Bean(name = "scheduler")
-    public Scheduler scheduler(ScheduleJobFactory scheduleJobFactory) throws Exception {
-        SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
-        factoryBean.setJobFactory(scheduleJobFactory);
-        factoryBean.afterPropertiesSet();
-        Scheduler scheduler = factoryBean.getScheduler();
-        scheduler.start();
-        return scheduler;
+        factory.setQuartzProperties(prop);
+
+        factory.setSchedulerName("RenrenScheduler");
+        //延时启动
+        factory.setStartupDelay(30);
+        factory.setApplicationContextSchedulerContextKey("applicationContextKey");
+        //可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
+        factory.setOverwriteExistingJobs(true);
+        //设置自动启动，默认为true
+        factory.setAutoStartup(true);
+
+        return factory;
     }
 }

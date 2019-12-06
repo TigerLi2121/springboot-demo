@@ -16,8 +16,8 @@ import java.util.Date;
  * @date 2019-09-09
  */
 @Data
-@TableName("schedule_log")
-public class ScheduleLog implements Serializable {
+@TableName("schedule_job_log")
+public class ScheduleJobLogEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(type = IdType.AUTO)

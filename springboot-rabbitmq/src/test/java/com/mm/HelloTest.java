@@ -1,5 +1,6 @@
 package com.mm;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mm.com.mm.hello.HelloSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ public class HelloTest {
     private HelloSender helloSender;
 
     @Test
-    public void send() {
+    public void send() throws JsonProcessingException {
         helloSender.send();
     }
 }

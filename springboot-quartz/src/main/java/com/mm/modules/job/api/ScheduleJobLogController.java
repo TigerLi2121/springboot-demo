@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.common.utils.R;
-import com.mm.modules.job.entity.ScheduleLog;
-import com.mm.modules.job.service.ScheduleLogService;
+import com.mm.modules.job.entity.ScheduleJobLogEntity;
+import com.mm.modules.job.service.ScheduleJobLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/quartzLog")
-public class ScheduleLogController {
+public class ScheduleJobLogController {
 
     @Autowired
-    private ScheduleLogService scheduleLogService;
+    private ScheduleJobLogService scheduleJobLogService;
 
     /**
      * 定时任务日志列表
@@ -31,8 +31,8 @@ public class ScheduleLogController {
     @GetMapping("/list")
     public R list(Long page, Long limit, String jobId) {
         log.info("list page:{} limit:{} jobId:{}", page, limit, jobId);
-        IPage<ScheduleLog> iPage = scheduleLogService.page(new Page<>(page, limit),
-                new QueryWrapper<ScheduleLog>().like(StringUtils.isNotBlank(jobId), "job_id", jobId));
+        IPage<ScheduleJobLogEntity> iPage = scheduleJobLogService.page(new Page<>(page, limit),
+                new QueryWrapper<ScheduleJobLogEntity>().like(StringUtils.isNotBlank(jobId), "job_id", jobId));
         return R.ok().put("list", iPage.getRecords()).put("total", iPage.getTotal());
     }
 
@@ -41,7 +41,7 @@ public class ScheduleLogController {
      */
     @GetMapping("/info/{logId}")
     public R info(@PathVariable("logId") Long logId) {
-        ScheduleLog log = scheduleLogService.getById(logId);
+        ScheduleJobLogEntity log = scheduleJobLogService.getById(logId);
         return R.ok().put("log", log);
     }
 }
