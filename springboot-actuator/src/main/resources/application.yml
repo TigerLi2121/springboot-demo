@@ -25,4 +25,5 @@ management:
       show-details: ALWAYS
 
 logging:
-  file: /log/actuator.log
+  file:
+    path: logs/actuator.log
