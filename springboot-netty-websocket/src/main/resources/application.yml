@@ -1,3 +1,4 @@
 logging:
   level:
+    com.mm: debug
     io.netty: debug

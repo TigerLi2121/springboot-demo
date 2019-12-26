@@ -37,22 +37,23 @@ public class NettyWebSocketServer implements CommandLineRunner {
      * 开启服务端
      */
     private void run() {
+        log.info("正在启动websocket服务器");
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
         try {
-            ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(eventLoopGroup, workGroup);
-            serverBootstrap.channel(NioServerSocketChannel.class);
-            serverBootstrap.childHandler(new WebSocketChannelHandler());
-            log.info("服务端开启等待客户端连接..");
-            Channel channel = serverBootstrap.bind(8888).sync().channel();
+            ServerBootstrap bootstrap = new ServerBootstrap();
+            bootstrap.group(eventLoopGroup, workGroup);
+            bootstrap.channel(NioServerSocketChannel.class);
+            bootstrap.childHandler(new WebSocketChannelHandler());
+            Channel channel = bootstrap.bind(8888).sync().channel();
+            log.info("websocket服务器启动成功：{}", channel);
             channel.closeFuture().sync();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("websocket服务器运行出错：", e);
         } finally {
-            //退出程序
             eventLoopGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
+            log.info("websocket服务器已关闭");
         }
     }
 }
