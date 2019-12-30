@@ -10,5 +10,5 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class NettyConfig {
     public static ChannelGroup group = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
-    public static Map<Object, ChannelHandlerContext> userMap = new ConcurrentHashMap<>();
+    public static Map<String, ChannelHandlerContext> userMap = new ConcurrentHashMap<>();
 }

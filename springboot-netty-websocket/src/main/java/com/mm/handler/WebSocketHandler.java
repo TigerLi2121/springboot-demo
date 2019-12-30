@@ -103,11 +103,14 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<Object> {
         } else {
             String url = req.uri();
             log.info("url:{}", url);
-            String username = url.replace("/ws/", "");
-            log.info("username:{}", username);
-            if (username.trim().length() > 0) {
-                NettyConfig.userMap.put(username, ctx);
+            String userId = url.replace("/ws/", "");
+            log.info("userId:{}", userId);
+            if (userId.trim().length() <= 0) {
+                log.info("用户id不可缺省");
+                sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND));
+                return;
             }
+            NettyConfig.userMap.put(userId, ctx);
             wsh.handshake(ctx.channel(), req);
         }
     }
