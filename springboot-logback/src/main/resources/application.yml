@@ -1,0 +1,6 @@
+logging:
+  level:
+    com.mm: trace
+  file:
+    name: /var/log/app.log
+    max-size: 100MB

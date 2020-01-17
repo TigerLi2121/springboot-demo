@@ -21,4 +21,5 @@ include 'springboot-quartz'
 include 'springboot-shiro'
 include 'springboot-mongodb'
 include 'springboot-netty-websocket'
+include 'springboot-logback'
 
