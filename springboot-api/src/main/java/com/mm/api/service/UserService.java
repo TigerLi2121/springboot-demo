@@ -1,11 +1,11 @@
 package com.mm.api.service;
 
 import com.mm.api.entity.User;
-import com.mm.api.exception.ServiceException;
+import com.mm.api.exception.GException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,7 +17,7 @@ public class UserService {
 
     public void addUser(User user) {
         if (age > user.getAge()) {
-            throw new ServiceException("年龄不能低于18");
+            throw new GException("年龄不能低于18");
         }
         users.put(user.getId(), user);
     }
@@ -36,7 +36,7 @@ public class UserService {
                 .setNickName(user.getNickName())
                 .setGender(user.getGender())
                 .setAge(user.getAge())
-                .setGmtModified(new Date());
+                .setGmtModified(LocalDateTime.now());
         users.put(id, u);
     }
 
