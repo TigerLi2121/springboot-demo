@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class WebLogAspect {
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Pointcut("execution(public * com.mm.api..*.*(..))")
+    @Pointcut("execution(public * com.mm.api.web.*.*(..))")
     public void webLog(){}
 
     @Before("webLog()")
