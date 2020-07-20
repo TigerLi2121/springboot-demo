@@ -78,6 +78,7 @@ public class MqttConfig {
         // 同时消费（订阅）所有Topic
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
                 "mqttConsumer", mqttClientFactory(), "+/#");
+//                "mqttConsumer2", mqttClientFactory(), "$share/g/aaa");  // 共享订阅 $share/g/是共享订阅前缀 真实主题名:aaa
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);
         adapter.setOutputChannel(mqttInboundChannel());
