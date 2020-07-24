@@ -12,6 +12,7 @@ import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
 import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
+import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
@@ -100,7 +101,7 @@ public class MqttConfig {
     public MessageHandler handler() {
 
         return message -> {
-            String topic = message.getHeaders().get("mqtt_receivedTopic", String.class);
+            String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC, String.class);
             String payload = String.valueOf(message.getPayload());
             log.info("topic:{}; payload:{}", topic, payload);
         };

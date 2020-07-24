@@ -5,8 +5,6 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-test',
             'org.projectlombok:lombok',
             "de.codecentric:spring-boot-admin-starter-client:${springBootAdminVersion}",
-            'org.springframework.boot:spring-boot-starter-integration',
-            'org.springframework.integration:spring-integration-stream',
             'org.springframework.integration:spring-integration-mqtt'
     )
 }
