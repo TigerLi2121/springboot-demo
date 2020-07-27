@@ -2,6 +2,7 @@ package com.mm.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -26,6 +27,12 @@ import org.springframework.messaging.MessageHandler;
 @Configuration
 public class MqttConfig {
 
+    @Value("${mqtt.url}")
+    private String[] url;
+
+    @Value("${mqtt.topic}")
+    private String[] topic;
+
     /**
      * 订阅的bean名称
      */
@@ -42,7 +49,7 @@ public class MqttConfig {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[]{"tcp://192.168.168.150:1883"});
+        options.setServerURIs(url);
         factory.setConnectionOptions(options);
         return factory;
     }
@@ -64,8 +71,7 @@ public class MqttConfig {
     @ServiceActivator(inputChannel = CHANNEL_NAME_OUT)
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(
-                "mqttProducer",
-                mqttClientFactory());
+                "mqttProducer" + System.currentTimeMillis(), mqttClientFactory());
         messageHandler.setAsync(true);
         messageHandler.setDefaultTopic("topic1");
         return messageHandler;
@@ -78,8 +84,7 @@ public class MqttConfig {
     public MessageProducer inbound() {
         // 同时消费（订阅）所有Topic
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-                "mqttConsumer", mqttClientFactory(), "+/#");
-//                "mqttConsumer2", mqttClientFactory(), "$share/g/aaa");  // 共享订阅 $share/g/是共享订阅前缀 真实主题名:aaa
+                "mqttConsumer" + System.currentTimeMillis(), mqttClientFactory(), topic);
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setQos(1);
         adapter.setOutputChannel(mqttInboundChannel());
