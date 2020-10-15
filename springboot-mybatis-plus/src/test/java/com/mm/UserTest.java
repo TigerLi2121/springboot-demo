@@ -32,8 +32,6 @@ public class UserTest {
         user.setPassword("888888");
         user.setNickName("哈哈");
         user.setGender(User.Gender.MALE);
-        user.setGmtCreate(new Date());
-        user.setGmtModified(new Date());
         userService.save(user);
     }
 
@@ -45,7 +43,6 @@ public class UserTest {
         user.setPassword("33333");
         user.setNickName("呵呵");
         user.setGender(User.Gender.FEMALE);
-        user.setGmtModified(new Date());
         userService.updateById(user);
     }
 

@@ -1,6 +1,8 @@
 package com.mm.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,8 +34,10 @@ public class User implements Serializable {
         MALE, FEMALE
     }
 
-    private Date gmtCreate;
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
 
-    private Date gmtModified;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
 
 }
