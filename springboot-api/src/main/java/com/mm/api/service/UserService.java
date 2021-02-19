@@ -15,32 +15,32 @@ public class UserService {
     private final static ConcurrentHashMap<Long, User> users = new ConcurrentHashMap<>();
     private final Integer age = 18;
 
-    public void addUser(User user) {
+    public void add(User user) {
         if (age > user.getAge()) {
             throw new GException("年龄不能低于18");
         }
         users.put(user.getId(), user);
     }
 
-    public List<User> getUserList() {
+    public List<User> list() {
         return new ArrayList<>(users.values());
     }
 
-    public User getUser(Long id) {
+    public User get(Long id) {
         return users.get(id);
     }
 
-    public void updateUser(Long id, User user) {
-        User u = users.get(id)
+    public void update(User user) {
+        User u = users.get(user.getId())
                 .setPassword(user.getPassword())
                 .setNickName(user.getNickName())
                 .setGender(user.getGender())
                 .setAge(user.getAge())
-                .setGmtModified(LocalDateTime.now());
-        users.put(id, u);
+                .setUpdateTime(LocalDateTime.now());
+        users.put(user.getId(), u);
     }
 
-    public void deleteUser(Long id) {
+    public void del(Long id) {
         users.remove(id);
     }
 }

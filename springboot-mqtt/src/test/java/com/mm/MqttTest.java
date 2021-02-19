@@ -32,7 +32,10 @@ public class MqttTest {
      */
     @Test
     public void send2(){
-        sender.sendToMqtt("topic2","hello mqtt2");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(i);
+            sender.sendToMqtt("topic2/"+i+"/client","hello mqtt"+i);
+        }
     }
 
     /**
