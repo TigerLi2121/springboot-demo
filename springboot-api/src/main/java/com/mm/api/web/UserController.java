@@ -7,8 +7,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * 用户列表
@@ -24,7 +29,7 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value = "获取用户列表", notes = "获取全部用户信息")
-    @GetMapping
+    @GetMapping("/list")
     public R list() {
         return R.ok().put("list", userService.list());
     }
@@ -32,22 +37,26 @@ public class UserController {
     @ApiOperation(value = "创建用户", notes = "根据User对象创建用户")
     @ApiImplicitParam(name = "user", value = "用户信息", required = true, dataType = "User")
     @PostMapping
-    public R add(@RequestBody @Validated User user) {
+    public R add(@RequestBody @Validated User user, BindingResult result) {
+        List<FieldError> fieldErrors = result.getFieldErrors();
+        if(!fieldErrors.isEmpty()){
+            return R.error(fieldErrors.get(0).getDefaultMessage());
+        }
         userService.add(user);
         return R.ok();
     }
 
     @ApiOperation(value = "获取用户详细信息", notes = "根据url的id来获取用户详细信息")
-    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
-    @GetMapping("/{id}")
-    public R get(@PathVariable Long id) {
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "query")
+    @GetMapping
+    public R get(@NotNull(message = "id is null") Long id) {
         return R.ok().put("user", userService.get(id));
     }
 
     @ApiOperation(value = "更新用户详细信息", notes = "根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息")
     @ApiImplicitParam(name = "user", value = "用户信息", required = true, dataType = "User")
     @PutMapping
-    public R update(@RequestBody User user) {
+    public R update(@RequestBody @Validated User user) {
         userService.update(user);
         return R.ok();
     }

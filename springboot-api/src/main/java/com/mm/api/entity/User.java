@@ -1,10 +1,7 @@
 package com.mm.api.entity;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -15,7 +12,6 @@ import java.time.LocalDateTime;
  *
  * @author shmily
  */
-@Accessors(chain = true)
 @Data
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -23,11 +19,11 @@ public class User implements Serializable {
     @ApiModelProperty(required = true, value = "用户ID", name = "id", example = "1")
     private Long id;
 
-    @ApiModelProperty(value = "用户帐号", name = "username", example = "666")
+    @ApiModelProperty(value = "用户帐号", name = "username", example = "abc123")
     @NotBlank(message = "username is null")
     private String username;
 
-    @ApiModelProperty(value = "用户密码", name = "password", example = "888888")
+    @ApiModelProperty(value = "用户密码", name = "password", example = "mm123")
     @NotBlank(message = "password is null")
     private String password;
 
