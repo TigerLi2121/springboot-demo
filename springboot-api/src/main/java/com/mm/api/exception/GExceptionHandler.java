@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolationException;
 import java.util.stream.Collectors;
 
+/**
+ * 异常处理
+ *
+ * @author shmily
+ */
 @Slf4j
 @RestControllerAdvice
 public class GExceptionHandler {
