@@ -3,7 +3,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-test',
             'mysql:mysql-connector-java',
-            'com.baomidou:mybatis-plus-boot-starter:3.2.0',
+            'com.baomidou:mybatis-plus-boot-starter:3.4.3',
             'org.projectlombok:lombok'
     )
 }
