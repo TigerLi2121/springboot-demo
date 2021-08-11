@@ -12,6 +12,6 @@ public class HelloHandler {
 
     public Mono<ServerResponse> hello(ServerRequest request) {
         return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromObject("Hello World!"));
+                .body(BodyInserters.fromValue("Hello World!"));
     }
 }

@@ -34,7 +34,7 @@ public class WebLogAspect {
         StringBuffer sb = getParam(point);
         sb.append("RESULT:").append(result).append("\n");
         sb.append("TIME:").append(System.currentTimeMillis() - beginTime);
-        log.debug("around:{}", sb.toString());
+        log.debug("around:{}", sb);
         return result;
     }
 
@@ -46,7 +46,7 @@ public class WebLogAspect {
             err = ((GException) e).getMsg();
         }
         sb.append("EXCEPTION:").append(err).append("\n");
-        log.debug("afterThrowing:{}", sb.toString());
+        log.debug("afterThrowing:{}", sb);
     }
 
     private StringBuffer getParam(JoinPoint point) {
