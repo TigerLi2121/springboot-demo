@@ -2,15 +2,21 @@ plugins {
     id 'com.google.cloud.tools.jib' version '1.0.2'
 }
 
+bootJar {
+    // 打包不包含版本号
+    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
+
 dependencies {
     implementation(
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-security',
             'org.springframework.boot:spring-boot-starter-mail',
-            'org.projectlombok:lombok',
             "cn.hutool:hutool-all:${hutoolVersion}",
             "de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}"
     )
+    annotationProcessor('org.projectlombok:lombok')
+    compileOnly('org.projectlombok:lombok')
 }
 
 jib {
