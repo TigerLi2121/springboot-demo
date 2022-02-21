@@ -1,5 +1,6 @@
 package com.mm.notifier;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.mm.util.DingTalkUtil;
 import de.codecentric.boot.admin.server.domain.entities.Instance;
@@ -27,11 +28,15 @@ public class DingTalkNotifier extends AbstractStatusChangeNotifier {
     @Override
     protected Mono<Void> doNotify(InstanceEvent event, Instance instance) {
         String serviceName = instance.getRegistration().getName();
+        String env = instance.getRegistration().getMetadata().get("tags.environment");
         String serviceUrl = instance.getRegistration().getServiceUrl();
         String status = instance.getStatusInfo().getStatus();
         Map<String, Object> details = instance.getStatusInfo().getDetails();
         StringBuilder str = new StringBuilder();
         str.append("监控报警 : 【" + serviceName + "】");
+        if (StrUtil.isNotBlank(env)) {
+            str.append("[" + env + "]");
+        }
         str.append("\n【服务地址】" + serviceUrl);
         str.append("\n【状态】" + status);
         str.append("\n【详情】" + JSONUtil.toJsonStr(details));

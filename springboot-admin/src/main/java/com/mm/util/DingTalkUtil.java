@@ -1,6 +1,7 @@
 package com.mm.util;
 
 import cn.hutool.core.collection.IterUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.StaticLog;
@@ -19,9 +20,9 @@ import java.util.*;
  */
 public class DingTalkUtil {
 
-    public static String webhook = "https://oapi.dingtalk.com/robot/send?access_token=xxx";
+    public static String webhook = "";
 
-    public static String secret = "xxx";
+    public static String secret = "";
 
     static Properties p = new Properties();
 
@@ -36,6 +37,9 @@ public class DingTalkUtil {
         initProp();
         webhook = p.getProperty("webhook", webhook);
         secret = p.getProperty("secret", secret);
+        if (StrUtil.isBlank(webhook) || StrUtil.isBlank(secret)) {
+            return null;
+        }
         Long timestamp = System.currentTimeMillis();
         String stringToSign = timestamp + "\n" + secret;
         try {
