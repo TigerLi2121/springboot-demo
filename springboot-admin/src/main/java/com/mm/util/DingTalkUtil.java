@@ -19,9 +19,9 @@ import java.util.*;
  */
 public class DingTalkUtil {
 
-    public static String webhook = "https://oapi.dingtalk.com/robot/send?access_token=d3547be1e674ddfb340e9ba92656af30410a4f560227aa8ed49f24d060de3644";
+    public static String webhook = "https://oapi.dingtalk.com/robot/send?access_token=xxx";
 
-    public static String secret = "SEC04510bd2627bb3e8bc54799fb92cd86d53b556d98e982bf018b7e7301d9edceb";
+    public static String secret = "xxx";
 
     static Properties p = new Properties();
 
