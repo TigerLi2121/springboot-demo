@@ -3,7 +3,10 @@ buildscript {
         springBootVersion = '2.2.13.RELEASE'
     }
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven {
+            allowInsecureProtocol = true
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -20,10 +23,15 @@ allprojects {
     sourceCompatibility = '1.8'
 
     ext {
-        springBootAdminVersion = '2.3.0'
+        springBootAdminVersion = '2.3.1'
+        myBatisPlusVersion = '3.4.3'
+        hutoolVersion = '5.7.21'
     }
 
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven {
+            allowInsecureProtocol = true
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
     }
 }
