@@ -21,3 +21,7 @@ spring:
 #        mail:
 #          from: xxx@xxx.com   # 必填
 #          to: xxx@qq.com
+
+dingtalk:
+  webhook:
+  secret:

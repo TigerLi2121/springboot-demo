@@ -1,17 +1,20 @@
 package com.mm.util;
 
 import cn.hutool.core.collection.IterUtil;
+import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.StaticLog;
+import cn.hutool.setting.yaml.YamlUtil;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 钉钉报警消息
@@ -20,11 +23,7 @@ import java.util.*;
  */
 public class DingTalkUtil {
 
-    public static String webhook = "";
-
-    public static String secret = "";
-
-    static Properties p = new Properties();
+    static Dict dict = YamlUtil.loadByPath("application.yml");
 
     /**
      * 获取请求的URL
@@ -34,9 +33,9 @@ public class DingTalkUtil {
      */
     public static String getURL() {
         // 从配置文件中获取参数
-        initProp();
-        webhook = p.getProperty("webhook", webhook);
-        secret = p.getProperty("secret", secret);
+        Map dingtalk = dict.getByPath("dingtalk", Map.class);
+        String webhook = (String) dingtalk.get("webhook");
+        String secret = (String) dingtalk.get("secret");
         if (StrUtil.isBlank(webhook) || StrUtil.isBlank(secret)) {
             return null;
         }
@@ -120,18 +119,5 @@ public class DingTalkUtil {
         String response = HttpUtil.post(url, json);
         StaticLog.debug("DingTalkUtil sendText response:{}", response);
         return response;
-    }
-
-    private static void initProp() {
-        try (InputStream in = DingTalkUtil.class.getClassLoader().getResourceAsStream("dingtalk.properties")) {
-            if (in != null) {
-                StaticLog.debug("加载钉钉配置");
-                p.load(in);
-            } else {
-                StaticLog.debug("未获取到钉钉配置");
-            }
-        } catch (IOException e) {
-            StaticLog.debug("加载钉钉配置失败");
-        }
     }
 }
