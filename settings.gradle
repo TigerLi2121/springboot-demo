@@ -21,4 +21,5 @@ include 'springboot-shiro'
 include 'springboot-mongodb'
 include 'springboot-logback'
 include 'springboot-redisson'
+include 'springboot-rws'
 

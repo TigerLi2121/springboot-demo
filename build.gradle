@@ -25,6 +25,7 @@ allprojects {
     ext {
         springBootAdminVersion = '2.3.1'
         myBatisPlusVersion = '3.4.3'
+        myBatisPlusGeneratorVersion = '3.5.2'
         hutoolVersion = '5.7.21'
     }
 

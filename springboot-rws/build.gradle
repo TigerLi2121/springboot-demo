@@ -1,0 +1,15 @@
+dependencies {
+    implementation(
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-test',
+            'mysql:mysql-connector-java',
+            "com.baomidou:mybatis-plus-boot-starter:${myBatisPlusVersion}",
+            "cn.hutool:hutool-all:${hutoolVersion}",
+            'org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:5.1.0',
+            'org.projectlombok:lombok'
+    )
+    testImplementation(
+            "com.baomidou:mybatis-plus-generator:${myBatisPlusGeneratorVersion}",
+            'org.apache.velocity:velocity-engine-core:2.3',
+    )
+}
