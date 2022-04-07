@@ -2,7 +2,6 @@ package com.mm.test.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Builder
 @Data
-@TableName("order_1")
+//@TableName("order_0")
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +33,7 @@ public class Order implements Serializable {
      * 订单ID
      */
     private Long orderId;
+
 
     /**
      * 订单状态

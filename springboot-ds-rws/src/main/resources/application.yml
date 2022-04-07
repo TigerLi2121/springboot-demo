@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: springboot-sharding-jdbc
+    name: springboot-ds-rws
   shardingsphere:
     datasource:
       names: master,slave
@@ -21,6 +21,7 @@ spring:
     props:
       sql-show: true
     rules:
+      # 读写分离
       readwrite-splitting:
         data-sources:
           readwrite_ds:
@@ -32,3 +33,23 @@ spring:
         load-balancers:
           round_robin:
             type: ROUND_ROBIN
+      # 分片
+      sharding:
+        tables: # 分表
+          order:
+            actual-data-nodes: master.order_$->{0..1} # 分片表配置
+            table-strategy:
+              standard:
+                sharding-column: id # 分片列名称
+                sharding-algorithm-name: order-inline # 自动分片算法名称
+            key-generate-strategy:
+              column: id # 分布式序列列名称
+              key-generator-name: snowflake # 分布式序列算法名称
+        sharding-algorithms:
+          order-inline:
+            type: INLINE # 分片算法类型
+            props:
+              algorithm-expression: order_$->{id % 2} # 分片算法属性配置
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE # 分布式序列算法类型

@@ -5,14 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * mybatis-plus sharding-jdbc read write splitting
+ * 主从，读写分离，分表
+ * mybatis-plus sharding-jdbc
  *
  * @author lwl
  */
 @SpringBootApplication
 @MapperScan("com.mm.test.mapper")
-public class ShardingApp {
+public class DsRwsApp {
     public static void main(String[] args) {
-        SpringApplication.run(ShardingApp.class, args);
+        SpringApplication.run(DsRwsApp.class, args);
     }
 }
