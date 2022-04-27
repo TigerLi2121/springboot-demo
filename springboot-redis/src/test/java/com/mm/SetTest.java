@@ -1,5 +1,6 @@
 package com.mm;
 
+import com.mm.utils.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class SetTest {
 
     @Test
     public void save() {
-        System.out.println(redisTemplate.opsForSet().add(SINGLE_DEMAND_FLAG, "11"));
-        System.out.println(redisTemplate.opsForSet().add(SINGLE_DEMAND_FLAG, "22"));
+        System.out.println(RedisUtil.set(SINGLE_DEMAND_FLAG, "11"));
+        System.out.println(RedisUtil.set(SINGLE_DEMAND_FLAG, "22"));
         System.out.println(redisTemplate.opsForSet().randomMember(SINGLE_DEMAND_FLAG));
     }
 }

@@ -23,4 +23,5 @@ include 'springboot-logback'
 include 'springboot-redisson'
 include 'springboot-rws'
 include 'springboot-ds-rws'
+include 'springboot-common'
 

@@ -1,15 +1,16 @@
 package com.mm;
 
+import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mm.utils.RedisUtils;
-import org.junit.Assert;
+import com.mm.utils.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author: shmily
@@ -18,14 +19,16 @@ import java.util.HashMap;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisTest {
-    @Autowired
-    private RedisUtils redisUtils;
 
     @Test
     public void stringTest() {
-        redisUtils.set("aaa", "bbb");
-        System.out.println(redisUtils.get("ccc"));
-        Assert.assertEquals("bbb", redisUtils.get("aaa"));
+        Map<String, String> p = new TreeMap<>();
+        p.put("a", "b");
+        RedisUtil.set("map", JSONUtil.toJsonStr(p));
+        System.out.println(RedisUtil.get("map"));
+//        RedisUtil.set("aaa", "bbb");
+//        System.out.println(RedisUtil.get("ccc"));
+//        Assert.assertEquals("bbb", RedisUtil.get("aaa"));
     }
 
     @Test
@@ -35,11 +38,11 @@ public class RedisTest {
         param.put("id", "123");
         param.put("age", "18");
         param.put("name", "哈哈");
-        String json =  om.writeValueAsString(param);
-        redisUtils.set("hehe", json);
-        redisUtils.set("haha", json, 1);  //配置过期时间
+        String json = om.writeValueAsString(param);
+        RedisUtil.set("hehe", json);
+        RedisUtil.set("haha", json, 1L);  //配置过期时间
         Thread.sleep(1000);
         //redisTemplate.delete("hehe");
-        System.out.println(redisUtils.get("hehe"));
+        System.out.println(RedisUtil.get("hehe"));
     }
 }
