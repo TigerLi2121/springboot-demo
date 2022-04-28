@@ -1,17 +1,17 @@
-package com.mm.utils;
+package com.mm.util;
 
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Redis工具类
@@ -38,7 +38,7 @@ public class RedisUtil {
      *
      * @param keys
      */
-    public static void remove(final String... keys) {
+    public static void remove(String... keys) {
         for (String key : keys) {
             remove(key);
         }
@@ -49,7 +49,7 @@ public class RedisUtil {
      *
      * @param pattern
      */
-    public static void removePattern(final String pattern) {
+    public static void removePattern(String pattern) {
         Set<String> keys = redisTemplate.keys(pattern);
         if (keys.size() > 0) {
             redisTemplate.delete(keys);
@@ -62,11 +62,7 @@ public class RedisUtil {
      * @param key
      */
     public static boolean remove(String key) {
-        boolean result = false;
-        if (exists(key) && redisTemplate.delete(key)) {
-            result = true;
-        }
-        return result;
+        return redisTemplate.delete(key);
     }
 
     /**
@@ -75,7 +71,7 @@ public class RedisUtil {
      * @param key
      * @return
      */
-    public static boolean exists(final String key) {
+    public static boolean exists(String key) {
         return redisTemplate.hasKey(key);
     }
 
@@ -85,13 +81,8 @@ public class RedisUtil {
      * @param key
      * @return
      */
-    public static String get(final String key) {
-        String result = null;
-        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-        if (operations.get(key) != null) {
-            result = operations.get(key).toString();
-        }
-        return result;
+    public static Optional<Object> get(String key) {
+        return Optional.ofNullable(redisTemplate.opsForValue().get(key));
     }
 
     /**
@@ -113,47 +104,31 @@ public class RedisUtil {
      * @return
      */
     public static boolean set(final String key, String value, Long expireTime) {
-        boolean result = false;
         try {
-            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-            operations.set(key, value);
-            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
-            result = true;
+            redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(expireTime));
+            return true;
         } catch (Exception e) {
             log.error("set cache error", e);
         }
-        return result;
+        return false;
     }
 
     public static boolean hashSet(String key, String hk, Object hv) {
-        boolean result = false;
         try {
             redisTemplate.opsForHash().put(key, hk, hv);
-            result = true;
+            return true;
         } catch (Exception e) {
             log.error("hashSet cache error", e);
         }
-        return result;
+        return false;
     }
 
-    public static String hashGet(String key, String hk) {
-        String result = null;
-        try {
-            result = redisTemplate.opsForHash().get(key, hk).toString();
-        } catch (Exception e) {
-            log.error("hashGet cache error", e);
-        }
-        return result;
+    public static Optional<Object> hashGet(String key, String hk) {
+        return Optional.ofNullable(redisTemplate.opsForHash().get(key, hk));
     }
 
-    public static Set<String> hashKeyList(String key) {
-        Set<String> result = null;
-        try {
-            result = redisTemplate.opsForHash().keys(key);
-        } catch (Exception e) {
-            log.error("hashKeyList cache error", e);
-        }
-        return result;
+    public static Optional<Set> hashKeyList(String key) {
+        return Optional.ofNullable(redisTemplate.opsForHash().keys(key));
     }
 
     public static void addList(String key, Object obj) {

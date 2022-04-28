@@ -1,4 +1,4 @@
-package com.mm.utils;
+package com.mm.util;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

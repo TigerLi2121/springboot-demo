@@ -1,6 +1,7 @@
 package com.mm.common.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -17,56 +18,57 @@ import java.util.Map;
  **/
 @Slf4j
 public class JsonUtil {
-    public static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper om = new ObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    public static <T> String bean2Json(T bean) {
+    public static <T> String toJson(T bean) {
         try {
-            return objectMapper.writeValueAsString(bean);
+            return om.writeValueAsString(bean);
         } catch (JsonProcessingException e) {
             log.error("bean2Json e:", e);
         }
         return null;
     }
 
-    public static <T> T json2Bean(String json, Class<T> beanClass) {
+    public static <T> T toBean(String json, Class<T> beanClass) {
         try {
-            return objectMapper.readValue(json, beanClass);
+            return om.readValue(json, beanClass);
         } catch (IOException e) {
             log.error("json2Bean e:", e);
         }
         return null;
     }
 
-    public static String map2Json(Map map) {
+    public static String toJson(Map map) {
         try {
-            return objectMapper.writeValueAsString(map);
+            return om.writeValueAsString(map);
         } catch (JsonProcessingException e) {
             log.error("map2Json e:", e);
         }
         return null;
     }
 
-    public static Map json2Map(String json) {
+    public static Map toMap(String json) {
         try {
-            return objectMapper.readValue(json, Map.class);
+            return om.readValue(json, Map.class);
         } catch (IOException e) {
             log.error("json2Map e:", e);
         }
         return null;
     }
 
-    public static String list2Json(List list) {
+    public static String toJson(List list) {
         try {
-            return objectMapper.writeValueAsString(list);
+            return om.writeValueAsString(list);
         } catch (JsonProcessingException e) {
             log.error("list2Json e:", e);
         }
         return null;
     }
 
-    public static <T> List<T> json2List(String json, Class<T> beanClass) {
+    public static <T> List<T> toList(String json, Class<T> beanClass) {
         try {
-            return objectMapper.readValue(json, getCollectionType(List.class, beanClass));
+            return om.readValue(json, getCollectionType(List.class, beanClass));
         } catch (IOException e) {
             log.error("json2List e:", e);
         }
@@ -74,6 +76,6 @@ public class JsonUtil {
     }
 
     public static JavaType getCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
-        return objectMapper.getTypeFactory().constructParametricType(collectionClass, elementClasses);
+        return om.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 }

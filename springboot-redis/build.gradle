@@ -1,5 +1,6 @@
 dependencies {
-    implementation (
+    api project(path: ':springboot-common')
+    implementation(
             'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-data-redis',
             'org.apache.commons:commons-pool2',
