@@ -1,6 +1,6 @@
 spring:
   redis:
-    host: 192.168.168.150
+    host: 192.168.168.1501
     lettuce:
       pool:
         max-active: 20
