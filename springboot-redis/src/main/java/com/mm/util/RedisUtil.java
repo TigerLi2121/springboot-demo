@@ -92,7 +92,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public static boolean set(final String key, String value) {
+    public static boolean set(final String key, Object value) {
         return set(key, value, DEFAULT_EXPIRE);
     }
 
@@ -103,7 +103,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public static boolean set(final String key, String value, Long expireTime) {
+    public static boolean set(final String key, Object value, Long expireTime) {
         try {
             redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(expireTime));
             return true;

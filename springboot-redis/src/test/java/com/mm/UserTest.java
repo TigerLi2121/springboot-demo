@@ -1,5 +1,6 @@
 package com.mm;
 
+import com.mm.entity.UserEntity;
 import com.mm.service.UserService;
 import com.mm.util.RedisUtil;
 import org.junit.Test;
@@ -34,6 +35,13 @@ public class UserTest {
     public void str() {
         RedisUtil.set("aa", "bb");
         System.out.println(RedisUtil.get("aa").get().equals("bb"));
+    }
+
+    @Test
+    public void user() {
+        RedisUtil.set("user::aa", new UserEntity("cc"));
+        System.out.println(RedisUtil.get("user::aa").get());
+        System.out.println(userService.get("aa"));
     }
 
 }
