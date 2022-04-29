@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * @author lwl
  */
@@ -13,12 +15,12 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Cacheable(value = {"user"}, key = "#name", condition = "#name != null")
-    public UserEntity get(String name) {
+    public Optional<UserEntity> get(String name) {
         log.info("get:{}", name);
         if (name == null) {
-            return null;
+            return Optional.empty();
         }
-        return new UserEntity(name);
+        return Optional.ofNullable(new UserEntity(name));
     }
 
     @Cacheable(value = {"user_name"}, key = "#name", condition = "#name != null")
