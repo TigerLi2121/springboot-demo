@@ -1,8 +1,5 @@
 dependencies {
     implementation(
-            'org.springframework.boot:spring-boot-starter-web',
-            'org.springframework.boot:spring-boot-starter-test',
-            'org.projectlombok:lombok',
             'org.springframework.boot:spring-boot-starter-data-mongodb'
     )
 }

@@ -1,16 +1,11 @@
-buildscript {
-    ext {
-        springBootVersion = '2.2.13.RELEASE'
-    }
-    repositories {
-        maven { url "https://maven.aliyun.com/repository/public" }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
+plugins {
+    id 'org.springframework.boot' version '2.4.13'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
 allprojects {
+
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
@@ -21,19 +16,20 @@ allprojects {
     sourceCompatibility = '1.8'
 
     ext {
-        springBootAdminVersion = '2.3.1'
+        springBootAdminVersion = '2.6.7'
         myBatisPlusVersion = '3.4.3'
         myBatisPlusGeneratorVersion = '3.5.2'
-        hutoolVersion = '5.7.21'
+        shardingsphereJdbcVersion = '5.1.0'
     }
 
     dependencies {
-        implementation(
-                'org.springframework.boot:spring-boot-starter-web',
-                "cn.hutool:hutool-all:${hutoolVersion}",
-        )
-        annotationProcessor('org.projectlombok:lombok')
-        compileOnly('org.projectlombok:lombok')
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'cn.hutool:hutool-all:5.7.21'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        compileOnly 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
     }
 
     repositories {

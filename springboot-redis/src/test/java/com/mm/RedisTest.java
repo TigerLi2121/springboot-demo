@@ -3,10 +3,8 @@ package com.mm;
 import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mm.util.RedisUtil;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +14,6 @@ import java.util.TreeMap;
  * @author: shmily
  * @date: 2018/2/13 17:32
  **/
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class RedisTest {
 

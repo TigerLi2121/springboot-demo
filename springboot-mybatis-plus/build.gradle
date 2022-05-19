@@ -1,9 +1,6 @@
 dependencies {
     implementation(
-            'org.springframework.boot:spring-boot-starter-web',
-            'org.springframework.boot:spring-boot-starter-test',
             'mysql:mysql-connector-java',
             "com.baomidou:mybatis-plus-boot-starter:${myBatisPlusVersion}",
-            'org.projectlombok:lombok'
     )
 }

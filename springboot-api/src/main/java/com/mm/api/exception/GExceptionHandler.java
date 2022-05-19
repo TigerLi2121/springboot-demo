@@ -1,6 +1,7 @@
 package com.mm.api.exception;
 
-import com.mm.api.common.R;
+import com.mm.common.util.R;
+import com.mm.common.util.RCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,19 +23,19 @@ public class GExceptionHandler {
     @ExceptionHandler(BindException.class)
     public R handleException(BindException e) {
         String msg = e.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
-        return R.error(100, msg);
+        return R.code(RCode.PARAM_FAILED, msg);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public R handleException(MethodArgumentNotValidException e) {
         String msg = e.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
-        return R.error(100, msg);
+        return R.code(RCode.PARAM_FAILED, msg);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public R handleException(ConstraintViolationException e) {
         String msg = e.getConstraintViolations().stream().map(m -> m.getMessage()).collect(Collectors.toList()).get(0);
-        return R.error(100, msg);
+        return R.code(RCode.PARAM_FAILED, msg);
     }
 
     @ExceptionHandler(GException.class)
@@ -45,6 +46,6 @@ public class GExceptionHandler {
     @ExceptionHandler(Exception.class)
     public R handleException(Exception e) {
         log.error("【系统异常】:", e);
-        return R.error("系统异常");
+        return R.error();
     }
 }

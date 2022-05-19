@@ -1,18 +1,16 @@
 package com.mm;
 
 import com.mm.mqtt.IMqttSender;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * 测试
+ *
  * @author shmily
  * @date 2019/5/20
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class MqttTest {
 
@@ -23,7 +21,7 @@ public class MqttTest {
      * 发送消息
      */
     @Test
-    public void send(){
+    public void send() {
         sender.sendToMqtt("hello mqtt");
     }
 
@@ -31,10 +29,10 @@ public class MqttTest {
      * 发送消息
      */
     @Test
-    public void send2(){
+    public void send2() {
         for (int i = 1; i <= 10; i++) {
             System.out.println(i);
-            sender.sendToMqtt("topic2/"+i+"/client","hello mqtt"+i);
+            sender.sendToMqtt("topic2/" + i + "/client", "hello mqtt" + i);
         }
     }
 
@@ -42,7 +40,7 @@ public class MqttTest {
      * 发送消息
      */
     @Test
-    public void send3(){
-        sender.sendToMqtt("topic3",1,"hello mqtt3");
+    public void send3() {
+        sender.sendToMqtt("topic3", 1, "hello mqtt3");
     }
 }

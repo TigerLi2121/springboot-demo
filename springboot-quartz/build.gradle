@@ -1,11 +1,9 @@
 dependencies {
     implementation(
-            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-validation',
             'org.springframework.boot:spring-boot-starter-quartz',
             'mysql:mysql-connector-java',
             "com.baomidou:mybatis-plus-boot-starter:${myBatisPlusVersion}",
-            'org.projectlombok:lombok',
             'org.apache.commons:commons-lang3'
     )
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }

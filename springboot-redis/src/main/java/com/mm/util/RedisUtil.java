@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -81,8 +81,8 @@ public class RedisUtil {
      * @param key
      * @return
      */
-    public static Optional<Object> get(String key) {
-        return Optional.ofNullable(redisTemplate.opsForValue().get(key));
+    public static Object get(String key) {
+        return redisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -93,7 +93,7 @@ public class RedisUtil {
      * @return
      */
     public static boolean set(final String key, Object value) {
-        return set(key, value, DEFAULT_EXPIRE);
+        return set(key, value, null);
     }
 
     /**
@@ -101,11 +101,16 @@ public class RedisUtil {
      *
      * @param key
      * @param value
+     * @param expireTime 单位秒
      * @return
      */
     public static boolean set(final String key, Object value, Long expireTime) {
         try {
-            redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(expireTime));
+            if (Objects.isNull(expireTime)) {
+                redisTemplate.opsForValue().set(key, value);
+            } else {
+                redisTemplate.opsForValue().set(key, value, Duration.ofSeconds(expireTime));
+            }
             return true;
         } catch (Exception e) {
             log.error("set cache error", e);
@@ -123,12 +128,12 @@ public class RedisUtil {
         return false;
     }
 
-    public static Optional<Object> hashGet(String key, String hk) {
-        return Optional.ofNullable(redisTemplate.opsForHash().get(key, hk));
+    public static Object hashGet(String key, String hk) {
+        return redisTemplate.opsForHash().get(key, hk);
     }
 
-    public static Optional<Set> hashKeyList(String key) {
-        return Optional.ofNullable(redisTemplate.opsForHash().keys(key));
+    public static Set hashKeyList(String key) {
+        return redisTemplate.opsForHash().keys(key);
     }
 
     public static void addList(String key, Object obj) {

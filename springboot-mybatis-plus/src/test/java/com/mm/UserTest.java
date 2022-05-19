@@ -5,20 +5,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mm.entity.User;
 import com.mm.service.UserService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author shmily
  * @date 2019/6/3
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserTest {
 
@@ -70,7 +66,7 @@ public class UserTest {
     }
 
     @Test
-    public void page(){
+    public void page() {
         IPage<User> page = userService.page(new Page<>(1, 10));
         System.out.println(page.getTotal());
         page.getRecords().forEach(System.out::println);
