@@ -4,12 +4,12 @@ import com.mm.api.entity.User;
 import com.mm.common.util.R;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * 用户列表
@@ -17,7 +17,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author shmily
  */
 @Tag(name = "用户")
-@Validated
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
@@ -27,13 +26,13 @@ public class UserController {
 
     @Operation(summary = "用户列表")
     @GetMapping
-    public R list() {
-        return R.ok(users.values());
+    public R<R.Page<List<User>>> page() {
+        return R.ok(users.values().stream().collect(Collectors.toList()), users.size());
     }
 
     @Operation(summary = "新增用户")
     @PostMapping
-    public R add(@Valid User user) {
+    public R add(@RequestBody User user) {
         users.put(user.getId(), user);
         return R.ok();
     }
@@ -46,7 +45,7 @@ public class UserController {
 
     @Operation(summary = "修改用户")
     @PutMapping
-    public R update(@Valid User user) {
+    public R update(@RequestBody User user) {
         users.put(user.getId(), user);
         return R.ok();
     }

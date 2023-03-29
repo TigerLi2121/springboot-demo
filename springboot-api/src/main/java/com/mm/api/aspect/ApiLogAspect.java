@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * 请求日志
@@ -65,12 +63,7 @@ public class ApiLogAspect {
         sb.append("IP:").append(ServletUtil.getClientIP(request)).append(" ");
         sb.append("METHOD:").append(point.getTarget().getClass().getName()).append(".")
                 .append(point.getSignature().getName()).append(" ");
-        Map<String, String> param = new TreeMap<>();
-        Map<String, String[]> parameterMap = request.getParameterMap();
-        for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-            param.put(entry.getKey(), entry.getValue()[0]);
-        }
-        sb.append("PARAM:").append(param).append(" ");
+        sb.append("PARAM:").append(JSONUtil.toJsonStr(point.getArgs())).append(" ");
         return sb;
     }
 

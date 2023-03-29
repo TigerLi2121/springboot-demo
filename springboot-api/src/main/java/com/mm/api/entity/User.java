@@ -2,6 +2,7 @@ package com.mm.api.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * @author shmily
  */
 @Data
+@Validated
 @Schema(description = "用户")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -41,5 +43,4 @@ public class User implements Serializable {
 
     @Schema(name = "update_time", description = "修改时间", example = "2022-08-08 08:08:08")
     private LocalDateTime updateTime;
-
 }

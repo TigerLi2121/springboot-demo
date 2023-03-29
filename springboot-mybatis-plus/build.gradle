@@ -1,4 +1,5 @@
 dependencies {
+    api project(path: ':springboot-common')
     implementation(
             'mysql:mysql-connector-java',
             "com.baomidou:mybatis-plus-boot-starter:${myBatisPlusVersion}",
