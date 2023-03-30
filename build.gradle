@@ -16,7 +16,7 @@ allprojects {
     sourceCompatibility = '1.8'
 
     ext {
-        springBootAdminVersion = '2.6.7'
+        springBootAdminVersion = '2.6.11'
         myBatisPlusVersion = '3.4.3'
         myBatisPlusGeneratorVersion = '3.5.2'
         shardingsphereJdbcVersion = '5.1.0'
