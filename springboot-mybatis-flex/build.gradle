@@ -1,0 +1,6 @@
+dependencies {
+    api project(path: ':springboot-common')
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'com.mybatis-flex:mybatis-flex-spring-boot-starter:1.7.5'
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+}

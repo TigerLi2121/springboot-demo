@@ -5,14 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author shmily
+ * @author tigerli
  * @date 2019/4/1
  */
 @Configuration
 public class RabbitConfig {
 
     @Bean
-    public Queue queue(){
+    public Queue queue() {
         return new Queue("hello");
     }
 }

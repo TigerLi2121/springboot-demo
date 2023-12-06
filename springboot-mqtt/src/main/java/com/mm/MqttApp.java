@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * mqtt
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/5/20
  */
 @SpringBootApplication

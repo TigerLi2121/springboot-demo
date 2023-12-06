@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 请求日志
  *
- * @author shmily
+ * @author tigerli
  */
 @Slf4j
 @Aspect

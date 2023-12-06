@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 /**
  * 认证服务器
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/6/21
  */
 @Configuration

@@ -1,18 +1,18 @@
 package com.mm;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * log4j2日志
+ * mybatis-flex
  *
- * @author tigerli
- * @date 2019/4/1
+ * @author lwl
  */
+@MapperScan("com.mm.mapper")
 @SpringBootApplication
-public class Log4j2App {
-
+public class MybatisFlexApp {
     public static void main(String[] args) {
-        SpringApplication.run(Log4j2App.class, args);
+        SpringApplication.run(MybatisFlexApp.class, args);
     }
 }

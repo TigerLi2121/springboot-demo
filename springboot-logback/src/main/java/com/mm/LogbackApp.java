@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * logback日志
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/4/1
  */
 @SpringBootApplication

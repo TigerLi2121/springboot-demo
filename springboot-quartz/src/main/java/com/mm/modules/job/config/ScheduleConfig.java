@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * 定时任务配置
  *
- * @author shmily
+ * @author tigerli
  * @date 2019-09-09
  */
 @Configuration

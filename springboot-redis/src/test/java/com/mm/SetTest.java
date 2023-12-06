@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 /**
  * set 测试
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/4/16
  */
 @SpringBootTest

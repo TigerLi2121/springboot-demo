@@ -4,8 +4,8 @@ import com.mm.common.utils.SpringContextUtils;
 import com.mm.common.utils.ThrowableUtils;
 import com.mm.modules.job.entity.ScheduleJobEntity;
 import com.mm.modules.job.entity.ScheduleJobLogEntity;
-import com.mm.modules.job.service.ScheduleJobService;
 import com.mm.modules.job.service.ScheduleJobLogService;
+import com.mm.modules.job.service.ScheduleJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.annotation.Async;
@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
 /**
  * 定时任务
  *
- * @author shmily
+ * @author tigerli
  * @date 2019-09-09
  */
 @Slf4j

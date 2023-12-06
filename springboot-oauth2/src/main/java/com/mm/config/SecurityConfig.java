@@ -15,7 +15,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 /**
  * 安全配置
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/6/21
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true)

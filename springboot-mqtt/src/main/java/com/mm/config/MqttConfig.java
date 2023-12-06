@@ -20,18 +20,12 @@ import org.springframework.messaging.MessageHandler;
 /**
  * mqtt配置
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/5/20
  */
 @Slf4j
 @Configuration
 public class MqttConfig {
-
-    @Value("${mqtt.url}")
-    private String[] url;
-
-    @Value("${mqtt.topic}")
-    private String[] topic;
 
     /**
      * 订阅的bean名称
@@ -41,6 +35,10 @@ public class MqttConfig {
      * 发布的bean名称
      */
     public static final String CHANNEL_NAME_OUT = "mqttOutboundChannel";
+    @Value("${mqtt.url}")
+    private String[] url;
+    @Value("${mqtt.topic}")
+    private String[] topic;
 
     /**
      * MQTT客户端

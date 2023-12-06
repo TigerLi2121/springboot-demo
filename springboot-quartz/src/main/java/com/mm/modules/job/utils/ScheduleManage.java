@@ -16,7 +16,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 /**
  * 定时任务操作
  *
- * @author shmily
+ * @author tigerli
  * @date 2019-09-09
  */
 @Slf4j

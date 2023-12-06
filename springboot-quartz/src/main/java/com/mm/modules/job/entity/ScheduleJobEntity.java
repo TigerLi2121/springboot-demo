@@ -13,16 +13,14 @@ import java.util.Date;
 /**
  * 定时任务
  *
- * @author shmily
+ * @author tigerli
  * @date 2019-09-09
  */
 @Data
 @TableName("schedule_job")
 public class ScheduleJobEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     public static final String JOB_KEY = "JOB_KEY";
-
+    private static final long serialVersionUID = 1L;
     @TableId(type = IdType.AUTO)
     private Long id;
 

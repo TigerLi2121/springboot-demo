@@ -1,13 +1,12 @@
 package com.mm.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.mm.entity.User;
+import com.mybatisflex.core.service.IService;
 
 /**
  * 用户
  *
  * @author tigerli
- * @date 2019/6/3
  */
 public interface UserService extends IService<User> {
 }

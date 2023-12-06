@@ -5,7 +5,8 @@ import com.mm.entity.User;
 
 /**
  * 用户
- * @author shmily
+ *
+ * @author tigerli
  * @date 2019/6/3
  */
 public interface UserDao extends BaseMapper<User> {

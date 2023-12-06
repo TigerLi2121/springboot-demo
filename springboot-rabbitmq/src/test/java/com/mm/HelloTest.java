@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 /**
- * @author shmily
+ * @author tigerli
  * @date 2019/4/1
  */
 @SpringBootTest

@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 /**
  * 资源服务器
  *
- * @author shmily
+ * @author tigerli
  * @date 2019/6/21
  */
 @Configuration

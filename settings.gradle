@@ -21,4 +21,5 @@ include 'springboot-redisson'
 include 'springboot-db-rs'
 include 'springboot-ds-rws'
 include 'springboot-common'
+include 'springboot-mybatis-flex'
 
