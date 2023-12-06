@@ -1,0 +1,43 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: db-sharding
+  shardingsphere:
+    datasource:
+      names: ds1
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+        username: root
+        password: root
+    props:
+      sql-show: true
+    rules:
+      sharding:
+        tables:
+          order: # 逻辑表名
+            actual-data-nodes: ds1.order_$->{0..1} # 真实数据表名
+            table-strategy: # 分表策略
+              standard: # 用于单分片键的标准分片场景
+                sharding-cloumn: id # 分片列名称
+                sharding-algorithm-name: table-inline # 分片算法名
+            key-generate-strategy: # 分布式序列策略
+              column: id # 自增列名称，缺省表示不使用自增主键生成器
+              key-generator-name: SNOWFLAKE # 分布式序列算法名称
+        sharding-algorithms: # 分片算法配置
+          table-inline: # 分片算法名称
+            type: INLINE # 分片算法类型
+            props: # 分片算法属性配置
+              algorithm-expression: order_$->{id % 2} # 分片算法的行表达式
+        key-generators: # 分布式序列算法配置
+          snowflake:
+            type: SNOWFLAKE # 分布式序列算法（雪花算法：SNOWFLAKE； UUID：UUID）（注：UUID没有props配置）
+            props: # 分布式序列算法属性配置
+              worker-id: 1 # 工作机器唯一标识
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.mm.*.entity

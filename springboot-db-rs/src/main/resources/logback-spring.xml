@@ -28,18 +28,13 @@
     </rollingPolicy>
   </appender>
 
-  <springProfile name="dev">
-    <logger name="com.mm" level="DEBUG"/>
-    <root level="INFO">
+  <logger name="com.mm" level="DEBUG"/>
+  <root level="INFO">
+    <springProfile name="dev">
       <appender-ref ref="CONSOLE"/>
-      <appender-ref ref="FILE"/>
-    </root>
-  </springProfile>
+    </springProfile>
 
-  <springProfile name="!dev">
-    <logger name="com.mm" level="DEBUG"/>
-    <root level="INFO">
-      <appender-ref ref="FILE"/>
-    </root>
-  </springProfile>
+    <appender-ref ref="FILE"/>
+  </root>
+
 </configuration>

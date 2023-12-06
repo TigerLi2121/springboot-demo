@@ -1,53 +1,50 @@
 package com.mm.test.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * <p>
  * 订单
- * </p>
  *
  * @author lwl
  * @since 2022-04-06
  */
 @Builder
 @Data
-@TableName("order_1")
-public class Order implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("order")
+public class Order extends Model<Order> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * id
      */
-    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
-
-    /**
-     * 订单ID
-     */
-    private Long orderId;
 
     /**
      * 订单状态
      */
-    private Integer orderStatus;
+    @TableField(value = "status")
+    private Integer status;
 
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private LocalDateTime createdAt;
 
     /**
      * 修改时间
      */
-    private LocalDateTime updateTime;
+    private LocalDateTime updatedAt;
 
 }

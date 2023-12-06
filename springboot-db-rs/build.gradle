@@ -4,8 +4,4 @@ dependencies {
             "com.baomidou:mybatis-plus-boot-starter:${myBatisPlusVersion}",
             "org.apache.shardingsphere:shardingsphere-jdbc-core-spring-boot-starter:${shardingsphereJdbcVersion}",
     )
-    testImplementation(
-            "com.baomidou:mybatis-plus-generator:${myBatisPlusGeneratorVersion}",
-            'org.apache.velocity:velocity-engine-core:2.3',
-    )
 }

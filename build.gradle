@@ -18,8 +18,7 @@ allprojects {
     ext {
         springBootAdminVersion = '2.6.11'
         myBatisPlusVersion = '3.4.3'
-        myBatisPlusGeneratorVersion = '3.5.2'
-        shardingsphereJdbcVersion = '5.1.0'
+        shardingsphereJdbcVersion = '5.1.2'
     }
 
     dependencies {
