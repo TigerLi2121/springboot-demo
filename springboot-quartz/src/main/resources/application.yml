@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://192.168.168.150:3316/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://192.168.168.150:3316/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&rewriteBatchedStatements=true&allowMultiQueries=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
